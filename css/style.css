@@ -34,7 +34,8 @@ body {
 }
 
 #logo {
-    background-color: rgba(240, 144, 1, 0.8);
+    background-color: #f09001;
+    opacity: .8;
     font-weight: 600;
     color: white !important;
     padding: 0 15px;
@@ -42,7 +43,8 @@ body {
 }
 
 #logo:hover {
-    background-color: rgb(240, 144, 1);
+    opacity: 1;
+    background-color: #f09001;
     font-weight: 600;
     color: white !important;
     padding: 0 15px;

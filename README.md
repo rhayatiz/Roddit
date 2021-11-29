@@ -7,3 +7,5 @@
 ### Notes
 - Les variables d'accès à la base de données sont à modifier dans *DAO/DatabaseDAO.php* 
 - *databases/exports/* contient des exports temporaires de la base de donnéesnées
+-  username: admin
+-  password: admin

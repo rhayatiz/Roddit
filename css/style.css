@@ -5,3 +5,46 @@ html {
 body {
     font-family: 'Montserrat', sans-serif !important;
 }
+
+.hover-none:hover {
+    cursor: auto !important;
+}
+
+.underline-none:hover {
+    text-decoration: none !important;
+}
+
+.underline-none {
+    text-decoration: none !important;
+}
+
+.user-img img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.user-side-card {
+    top: 80px;
+    margin-top: 16px;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    height: fit-content;
+    padding: 20px 0;
+}
+
+#logo {
+    background-color: rgba(240, 144, 1, 0.8);
+    font-weight: 600;
+    color: white !important;
+    padding: 0 15px;
+    border-radius: 6px;
+}
+
+#logo:hover {
+    background-color: rgb(240, 144, 1);
+    font-weight: 600;
+    color: white !important;
+    padding: 0 15px;
+    border-radius: 6px;
+}

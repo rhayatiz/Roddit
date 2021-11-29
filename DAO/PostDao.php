@@ -1,5 +1,5 @@
 <?php
-// include(ROOT_FOLDER.'/Models/.php');
+// include(ROOT_FOLDER.'/models/.php');
 
 /**
  * ProduitDao : mise en place CRUD pour users

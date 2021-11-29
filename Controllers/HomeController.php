@@ -1,5 +1,5 @@
 <?php
-require(ROOT_FOLDER.'Controllers/Controller.php');
+require(ROOT_FOLDER.'controllers/Controller.php');
 require(ROOT_FOLDER.'DAO/UserDao.php');
 
 class HomeController extends Controller{
@@ -13,29 +13,24 @@ class HomeController extends Controller{
         $this->render('error', compact('error'));
     }
 
-    public function login(){
-        // Tentative de connexion
-        if(isset($_POST['loginForm'])){
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            
-            if ($user = (new UserDao())->auth($email, $password)){
-                $_SESSION['user'] = $user;
-                header('Location: index.php');
-                die();
-            }else{
-                $error = "Identifiants incorrects!";
-                $this->render('login', compact('error'));
-            }
-        // Première visite de la page, afficher le formulaire de connexion
+    public function login($email, $password){
+        if ($user = (new UserDao())->auth($email, $password)){
+            $_SESSION['user'] = $user;
+            header('Location: index.php');
+            die();
         }else{
-            $this->render('login');
+            $error = "Identifiants incorrects!";
+            $this->render('login', compact('error'));
         }
     }
 
     public function logout(){
-        unset($_SESSION['user']);
-        header('Location: index.php');
+        $_SESSION['user'] = null;
+        $this->index();
+    }
+
+    public function showLoginForm(){
+        $this->render('login');
     }
 
 }

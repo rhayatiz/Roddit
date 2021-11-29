@@ -1,5 +1,5 @@
 <?php
-include(ROOT_FOLDER.'/Models/User.php');
+include(ROOT_FOLDER.'/models/User.php');
 
 /**
  * UserDao : mise en place CRUD pour users
@@ -11,6 +11,14 @@ class UserDao
 	function __construct(){
         UserDao::$pdo = DatabasePDO::getInstance();
 	}
+
+    function auth($email, $password){
+        if ($email == "admin" && $password == "admin"){
+            return "admin";
+        }else{
+            return null;
+        }
+    }
 
 	function list(){//1 - Lire Données
         $sql='SELECT * FROM users';

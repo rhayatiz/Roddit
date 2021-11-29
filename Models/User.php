@@ -2,22 +2,28 @@
 
 require('Model.php');
 
-class Produit {
+class User {
     protected $nom;
     private $prenom;
+    private $username;
     private $email;
     private $password;
     private $dateNaissance;
     private $role;
 
-    function __construct($nom, $prenom, $email, $dateNaissance, $password, $role)
+    function __construct($nom, $username ,$prenom, $email, $dateNaissance, $password, $role)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
+        $this->username = $username;
         $this->email = $email;
         $this->dateNaissance = $dateNaissance;
         $this->password = $password;
         $this->role = $role;
+    }
+
+    public function getUsername(){
+        return $this->username;
     }
 
     public function getNom(){

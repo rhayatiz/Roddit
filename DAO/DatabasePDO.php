@@ -45,7 +45,7 @@ class DatabasePDO
    *
    * @var string
    */
-  const DATABASE_NAME = 'bachelor20a-ecommerce';
+  const DATABASE_NAME = 'roddit';
  
   /**
    * Constructeur

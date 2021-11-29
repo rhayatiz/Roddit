@@ -2,7 +2,7 @@
 
 require_once('Model.php');
 
-class User extends Model{
+class Post extends Model{
 
     public function __construct(){}
 

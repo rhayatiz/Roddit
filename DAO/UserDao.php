@@ -31,11 +31,11 @@ class UserDao
         $sql = 'SELECT * FROM users WHERE id = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$id]);
-        return $stm->fetch(PDO::FETCH_ASSOC); 
+        return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
     }
 
     function login($login,$password){
-        $sql = 'SELECT * FROM users WHERE login = ? and password = ?';
+        $sql = 'SELECT * FROM users WHERE username = ? and password = ?';
         $stm = self::$pdo->prepare($sql);
         $args = array(
             $login,
@@ -44,10 +44,9 @@ class UserDao
         $stm->execute($args);
 
         if($stm->rowCount()>0){
-            $user = $stm->fetch(PDO::FETCH_ASSOC); 
-            return $user;
+            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
         }else{
-            return false;
+            return null;
         }
     }
 

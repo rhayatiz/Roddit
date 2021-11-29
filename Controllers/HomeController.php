@@ -1,12 +1,18 @@
 <?php
 require(ROOT_FOLDER.'controllers/Controller.php');
 require(ROOT_FOLDER.'DAO/UserDao.php');
+require(ROOT_FOLDER.'DAO/PostDao.php');
 
 class HomeController extends Controller{
 
+    public function secret(){
+        echo 'hello there';
+    }
+
     public function index(){
-        // $this->render('home', compact('message', 'page_title', 'produits', 'categories'));
-        $this->render('home');
+
+        $posts = (new PostDao)->list();
+        $this->render('home', compact('posts'));
     }
 
     public function error($error){
@@ -14,8 +20,8 @@ class HomeController extends Controller{
     }
 
     public function login($email, $password){
-        if ($user = (new UserDao())->auth($email, $password)){
-            $_SESSION['user'] = $user;
+        if ($user = (new UserDao())->login($email, $password)){
+            $_SESSION['userId'] = $user->id;
             header('Location: index.php');
             die();
         }else{
@@ -25,7 +31,7 @@ class HomeController extends Controller{
     }
 
     public function logout(){
-        $_SESSION['user'] = null;
+        $_SESSION['userId'] = null;
         $this->index();
     }
 

@@ -46,6 +46,23 @@ switch ($page) {
         }
         break;
 
+    case 'register':
+        // ---- POST (tentative d'inscription)
+        if(isset($_POST['registerForm'])){
+            (new HomeController())->register([
+                "nom" => $_POST['nom'],
+                "prenom" => $_POST['prenom'],
+                "dateNaissance" => $_POST['dateNaissance'],
+                "username" => $_POST['username'],
+                "password" => $_POST['password'],
+                "email" => $_POST['email']
+            ]);
+        // ----- GET (afficher la page d'inscription)
+        }else{
+            (new HomeController)->showRegisterForm();
+        }
+        break;
+
     case 'logout':
         (new HomeController)->logout();
         break;

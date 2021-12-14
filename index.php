@@ -12,6 +12,7 @@ if(!isset($_SESSION)){session_start();};
 require('helpers' . DIRECTORY_SEPARATOR . 'functions.php');
 require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
+require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
@@ -57,6 +58,14 @@ switch ($page) {
             (new HomeController())->index();
         }
         break;
+
+    //index.php?post={id}
+    case 'post':
+        if(isset($_GET['id'])){
+            (new PostController())->show($_GET['id']);
+        }
+        break;
+
 
     default:
         $controller = new HomeController();

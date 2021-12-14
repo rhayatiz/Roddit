@@ -58,3 +58,23 @@ a.no-link-decoration:hover {
     color: rgb(218, 218, 218) !important;
     text-decoration: none;
 }
+
+
+.btnLike{
+    cursor: pointer;
+    outline: 0;
+    color: #AAA;
+
+}
+
+.btnLike:focus {
+    outline: none;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}

@@ -13,6 +13,7 @@ require('helpers' . DIRECTORY_SEPARATOR . 'functions.php');
 require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
+require('controllers' . DIRECTORY_SEPARATOR . 'LikeController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
@@ -63,6 +64,13 @@ switch ($page) {
     case 'post':
         if(isset($_GET['id'])){
             (new PostController())->show($_GET['id']);
+        }
+        break;
+
+    case 'like':
+        if(isset($_GET['idPost']) && $_GET['idUser'])
+        {
+            (new LikeController())->actionLikePost($_GET['idUser'], $_GET['idPost'], $_GET['statut']);
         }
         break;
 

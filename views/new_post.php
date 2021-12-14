@@ -1,9 +1,10 @@
+
 <?php include('shared/header.php');?>
 
 <div class="card">
-	<div class="card-header">form</div>
-	<div class="card-body">
-		<form method="POST" action="index.php?page=creatPost">
+    <div class="card-header">form</div>
+    <div class="card-body">
+        <form method="POST" action="index.php?page=creatPost">
             <div class="form-group">
                 <label for="titre">Titre</label>
                 <input required type="text" class="form-control" name="titre" id="titre" placeholder="Votre titre...">
@@ -15,9 +16,10 @@
                 <div><a id="charNum"></a>/5000</div>
             </div>
             <button type="submit" class="btn btn-warning" name="postForm">Créer</button>
-		</form>
-	</div>
+        </form>
+    </div>
 </div>
+
 <?php include('shared/footer.php'); ?>
 
 <script>

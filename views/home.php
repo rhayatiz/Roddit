@@ -13,7 +13,8 @@
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                        <p><?= $post->body ?></p>
+                            <!-- CHange overlow pour avoir un button "see all" -->
+                        <p class="overflow-hidden" style="max-height: 300px;"><?= $post->body ?></p>
                         <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par <cite title="Source Title"><?= $post->created_by ?></cite></footer>
                         </blockquote>
                     </div>

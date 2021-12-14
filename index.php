@@ -67,7 +67,14 @@ switch ($page) {
         break;
 
     case 'newPost':
-        (new HomeController())->newPost();
+        if(Auth::user())
+        {
+            (new HomeController())->newPost();
+        }
+        else
+        {
+            (new HomeController())->index();
+        }
         break;
 
     case 'creatPost':

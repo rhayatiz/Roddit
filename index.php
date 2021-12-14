@@ -66,6 +66,18 @@ switch ($page) {
         }
         break;
 
+    case 'newPost':
+        (new HomeController())->newPost();
+        break;
+
+    case 'creatPost':
+        // ---- POST (tentative de connexion)
+        if(isset($_POST['postForm']))
+        {
+            (new PostController())->createPost($_POST['titre'], $_POST['postText']);
+        }
+        break;
+
 
     default:
         $controller = new HomeController();

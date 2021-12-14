@@ -39,4 +39,8 @@ class HomeController extends Controller{
         $this->render('login');
     }
 
+    public function newPost(){
+        $this->render('new_post');
+    }
+
 }

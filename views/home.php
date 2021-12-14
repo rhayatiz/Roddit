@@ -42,13 +42,18 @@
                         <a class="no-link-decoration" href="?page=likes"><i class="far fa-thumbs-up mr-1"></i>Likes</a>
                     </div>
                 </div>
+                <br><br>
+                <div class="row d-flex mt-1">
+                    <div class="btn btn-sm btn-outline-secondary mx-auto w-75">
+                        <a class="no-link-decoration" href="?page=newPost"><i class="far fa-edit mr-1"></i>Créer un post</a>
+                    </div>
+                </div>
             </div>
         <?php } ?>
 
     </div>
 
 
-</div>
 </div>
 
 <?php include('shared/footer.php'); ?>

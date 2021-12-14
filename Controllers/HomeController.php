@@ -42,6 +42,38 @@ class HomeController extends Controller{
         $this->render('register');
     }
 
+    public function showProfile($view){
+        $user = (new UserDao())->findByUsername($_GET['user']);
+        // Si l'utilisateur n'existe pas, renvoyer vers l'accueil
+        if($user == null){
+            $this->index();
+            die();
+        }
+
+        switch ($view) {
+            // Afficher les posts de l'utilisateur
+            case 'posts':
+                $posts = (new PostDao())->listByUser($user->id);
+                $this->render('profile-posts', compact('user', 'posts'));
+                break;
+            
+            // Afficher les likes (posts likés) de l'utilisateur
+            case 'likes':
+                $likes = [];
+                $this->render('profile-likes', compact('user', 'likes'));
+                break;
+
+            // Afficher les likes (posts likés) de l'utilisateur
+            case 'comments':
+                $comments = [];
+                $this->render('profile-comments', compact('user', 'comments'));
+                break;
+
+            default:
+                $this->index();
+                break;
+        }
+    }
     
     public function register($data){
         //Email existant, renvoyer une erreur à la page inscription

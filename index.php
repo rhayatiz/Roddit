@@ -32,6 +32,13 @@ if (isset($_GET['page'])){
 // }else{
     //Si l'utilisateur est connecté, appeler le controller qui va charger les données et la vue
 switch ($page) {
+    case 'profile':
+        if(isset($_GET['show'])){
+            (new HomeController())->showProfile($_GET['show']);
+        }else{
+            (new HomeController())->showProfile('posts');
+        }
+        break;
     case 'home':
         (new HomeController())->index();
         break;

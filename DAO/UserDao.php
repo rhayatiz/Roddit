@@ -34,6 +34,26 @@ class UserDao
         return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
     }
 
+    function emailExists($email){
+        $sql = 'SELECT * FROM users WHERE email = ?';
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute([$email]);
+        if($stm->fetchAll(PDO::FETCH_CLASS, 'User')){
+            return true;
+        }
+        return false;
+    }
+
+    function usernameExists($username){
+        $sql = 'SELECT * FROM users WHERE username = ?';
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute([$username]);
+        if($stm->fetchAll(PDO::FETCH_CLASS, 'User')){
+            return true;
+        }
+        return false; 
+    }
+
     function login($login,$password){
         $sql = 'SELECT * FROM users WHERE username = ? and password = ?';
         $stm = self::$pdo->prepare($sql);
@@ -50,17 +70,19 @@ class UserDao
         }
     }
 
-	function create($user){
-        $sql = 'INSERT INTO users (nom, prenom, date_naissance, email, password, role_id) VALUES(?,?,?,?,?,?)';
+	function create($data){
+        $sql = 'INSERT INTO users (nom, prenom, dateNaissance, username, password, email, role) VALUES(?,?,?,?,?,?,?)';
         $stm = self::$pdo->prepare($sql);
         
         $args = array(
-            $user->getNom(),
-            $user->getPrenom(),
-            $user->getEmail(),
-            $user->getDateNaissance(),
-            md5($user->getPassword()),
-            $user->getRole());
+            $data['nom'],
+            $data['prenom'],
+            $data['dateNaissance'],
+            $data['username'],
+            md5($data['password']),
+            $data['email'],
+            0
+        );
         $stm->execute($args);
         
         if($stm->rowCount()>0){

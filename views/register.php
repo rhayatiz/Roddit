@@ -75,30 +75,46 @@
     <div class="main col-12 col-md-7">
         <div class="col-md-6 col-sm-12">
             <div class="login-form">
-                <form action="index.php?page=login" method="POST">
-                    <h5 class="text-left">Connexion</h5>
+                <form action="index.php?page=register" method="POST">
+                    <h5 class="text-left">Inscription</h5>
+                 
                     <div class="form-group">
-                        <input name="email" type="text" class="form-control" placeholder="Votre email...">
+                        <input name="prenom" type="text" class="form-control" placeholder="Prenom">
                     </div>
+
                     <div class="form-group">
-                        <input name="password" type="password" class="form-control" placeholder="Votre mot de passe...">
+                        <input name="nom" type="text" class="form-control" placeholder="Nom">
                     </div>
+
+                    <div class="form-group">
+                        <input name="username" type="text" class="form-control" placeholder="Pseudo">
+                    </div>
+
+                    
+                    <label for="dateNaissance">Date naissance:</label>
+
+                    <input type="date" id="dateNaissance" name="dateNaissance"
+                        value="2000-01-01">
+                    
+                    <div class="form-group">
+                        <input name="email" type="text" class="form-control" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control" placeholder="Mot de passe">
+                    </div>
+
                     <?php if(isset($error)){ ?>
                         <div class="alert alert-danger">
                             <?= $error ?>
                         </div>
                     <?php } ?>
                     
-                    <?php if(isset($message)){ ?>
-                        <div class="alert alert-success">
-                            <?= $message ?>
-                        </div>
-                    <?php } ?>
-                    <input type="submit" class="btn btn-login float-right" name="loginForm" value="Connexion">
+                    <input type="submit" class="btn btn-login float-right" name="registerForm" value="Inscription">
                     <br>
                     <br>
                     <div class="text-secondary float-right">
-                        <a href="?page=register">Inscription</a>
+                        Déja inscrit? <a href="?page=login">connexion</a>
                     </div>
                 </form>
             </div>

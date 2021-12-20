@@ -1,9 +1,4 @@
 <?php include('shared/header.php');?>
-
-
-
-<div style="margin-top:80px; min-height:calc(100vh - 46px - 80px - 10px) !important;" class="container mx-auto">
-
     <?php include('profile-header.php') ?>
 
     <div class="row mx-auto">
@@ -14,6 +9,12 @@
         <?php }else{ ?>
               <?php foreach($likes as $like){ ?>
 
+                <a href="?page=post&id=<?= $like->id ?>" class="no-hover-decoration">
+                  <div class="row mt-4 shadow-sm rounded overflow-hidden">
+                    <div class="col-12 font-weight-bold py-2 post-title"><?= $like->title ?></div>
+                    <div class="col-12 font-weight-light py-1 post-body"><?= $like->body ?></div>
+                  </div>
+                </a>
 
               <?php } ?>
         <?php } ?>

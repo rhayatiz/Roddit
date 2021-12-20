@@ -1,8 +1,4 @@
 <?php include('shared/header.php');?>
-
-
-<div style="margin-top:80px; min-height:calc(100vh - 46px - 80px - 10px) !important;" class="container mx-auto">
-
   <?php include('profile-header.php') ?>
 
   <div class="row mx-auto">

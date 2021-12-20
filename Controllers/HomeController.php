@@ -61,7 +61,7 @@ class HomeController extends Controller{
             // Afficher les likes (posts likés) de l'utilisateur
             case 'likes':
                 $page = 'likes';
-                $likes = [];
+                $likes = (new PostDao())->listLikedPostsByUser($user->id);
                 $this->render('profile-likes', compact('user', 'likes', 'page'));
                 break;
 

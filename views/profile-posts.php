@@ -1,23 +1,4 @@
 <?php include('shared/header.php');?>
-
-<style>
-  .post-title {
-    background-color: #d9d9d9;
-    color: #000;
-  }
-  .post-body {
-    max-height: 80px;
-    overflow: hidden;
-    background-color: #f7f7f7;
-    color: #141414;
-  }
-  .no-hover-decoration:hover{
-    text-decoration: none !important;
-  }
-</style>
-
-<div style="margin-top:80px; min-height:calc(100vh - 46px - 80px - 10px) !important;" class="container mx-auto">
-
     <?php include('profile-header.php') ?>
 
     <div class="row mx-auto">

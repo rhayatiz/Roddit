@@ -2,12 +2,12 @@
 require_once(ROOT_FOLDER.'controllers' . DIRECTORY_SEPARATOR . 'Controller.php');
 require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'UserDao.php');
 require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'PostDao.php');
+require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'MessagesDao.php');
 
-class PostController extends Controller{
+class MessagesController extends Controller{
 
-    public function show($id){
-        $post = (new PostDao)->get($id);
-        $this->render('post', compact('post'));
+    public function index(){
+        
     }
 
 }

@@ -58,3 +58,11 @@ a.no-link-decoration:hover {
     color: rgb(218, 218, 218) !important;
     text-decoration: none;
 }
+
+.orange {
+    color: #fd7e14;
+}
+
+.bg-orange {
+    background-color: #fd7e14;
+}

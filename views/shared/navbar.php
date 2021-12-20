@@ -5,13 +5,22 @@
         
         <div class="row d-flex">
             <?php if(Auth::user() != null){ //Utilisateur connecté ?>
-                <div class="user-img mr-2">
+                <div class="text-secondary font-weight-light my-auto mr-4">
+                    <a href="?page=profile&user=<?= Auth::user()->username ?>&show=messages" class="no-link-decoration">
+                        <span>
+                            <i class="fas fa-inbox"></i>
+                        </span>
+                        Messages (0)
+                    </a>
+                </div>
+
+
+                <div class="user-img mr-1">
                     <a href="?page=profile&user=<?= Auth::user()->username ?>">
                         <img src="./img/1/pppalall.png" alt="">
                     </a>
                 </div>
-
-                <a class="my-auto text-secondary ml-auto mr-2 underline-none" href="?page=profile&user=<?= Auth::user()->username ?>"><?= Auth::user()->username ?></a>
+                <a class="my-auto text-secondary ml-auto mr-4 underline-none" href="?page=profile&user=<?= Auth::user()->username ?>"><?= Auth::user()->username ?></a>
 
                 <a class="my-auto ml-1 d-flex" href="index.php?page=logout">
                     <i style="font-size:1.3rem" class="fas fa-sign-out-alt text-dark my-auto"></i>

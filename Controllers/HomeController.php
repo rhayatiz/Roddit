@@ -1,7 +1,7 @@
 <?php
-require_once(ROOT_FOLDER.'controllers/Controller.php');
-require_once(ROOT_FOLDER.'DAO/UserDao.php');
-require_once(ROOT_FOLDER.'DAO/PostDao.php');
+require_once(ROOT_FOLDER.'controllers' . DIRECTORY_SEPARATOR . 'Controller.php');
+require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'UserDao.php');
+require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'PostDao.php');
 
 class HomeController extends Controller{
 

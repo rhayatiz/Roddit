@@ -90,6 +90,10 @@ switch ($page) {
         }
         break;
 
+    case 'messages':
+        (new MessagesController())->index();
+        break;
+
 
     default:
         $controller = new HomeController();

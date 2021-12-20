@@ -53,7 +53,7 @@ class PostDao
         function listLikedPostsByUser($userId){
                 //1 - Lire Données
                 $sql='SELECT * FROM posts WHERE created_by = ? 
-                AND posts.id IN (select idPost from `like` where statut = 1 and idUser = ?)
+                AND posts.id IN (select idPost from `like` where statut = 2 and idUser = ?)
                 ORDER BY id DESC';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$userId, $userId]);

@@ -12,15 +12,20 @@ define('ROOT_FOLDER', $new_root . DIRECTORY_SEPARATOR);
 if(!isset($_SESSION)){session_start();};
 /*********** Dependencies *********/
 require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'functions.php');
+require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'DAO' . DIRECTORY_SEPARATOR . 'UserDao.php');
+require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
+require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
-header('Content-type: application/json');
-$data = [
-    'hello' => 'there'
-];
+switch ($_GET['action']) {
+    case 'unread':
+        header('Content-type: application/json');
+        echo (new MessageController)->index();
+    break;
+}
 
 
-echo json_encode($data);
+// header('Content-type: application/json');
 
 ?>

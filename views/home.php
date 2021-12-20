@@ -60,5 +60,9 @@
 
 </div>
 </div>
-
+<?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
+    <script>
+        getAllLikePostByUser(<?= Auth::user()->id ?>, 'getAll');
+    </script>
+<?php } ?>
 <?php include('shared/footer.php'); ?>

@@ -6,6 +6,13 @@ class LikeController extends Controller
 {
     public function actionLikePost($idUser, $idPost, $statut)
     {
+//        var_dump((new LikeDao())->actionLikePost($idPost, $idUser, $statut));
+//        die();
         return (new LikeDao())->actionLikePost($idPost, $idUser, $statut);
+    }
+
+    public function getAllLikedPostByUser($idUser)
+    {
+        return (new LikeDao())->listByUser($idUser);
     }
 }

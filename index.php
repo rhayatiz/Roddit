@@ -92,9 +92,15 @@ switch ($page) {
         break;
 
     case 'like':
-        if(isset($_GET['idPost']) && $_GET['idUser'])
+        if(isset($_GET['idUser']) && isset($_GET['statut']))
         {
-            (new LikeController())->actionLikePost($_GET['idUser'], $_GET['idPost'], $_GET['statut']);
+            $data = (new LikeController())->getAllLikedPostByUser($_GET['idUser']);
+            echo $data;
+        }
+        elseif(isset($_GET['idPost']) && $_GET['idUser'] && $_GET['statut'])
+        {
+             $data = (new LikeController())->actionLikePost($_GET['idUser'], $_GET['idPost'], $_GET['statut']);
+             echo $data;
         }
         break;
 

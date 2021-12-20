@@ -31,7 +31,20 @@ class UserDao
         $sql = 'SELECT * FROM users WHERE id = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$id]);
-        return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+        if($stm->rowCount()>0){
+            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+        }
+        return null;
+    }
+
+    function findByUsername($username){
+        $sql = 'SELECT * FROM users WHERE username = ?';
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute([$username]);
+        if($stm->rowCount()>0){
+            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+        }
+        return null;
     }
 
     function emailExists($email){

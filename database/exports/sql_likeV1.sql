@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table like
 --
 
-CREATE TABLE like (
+CREATE TABLE `like` (
                       idUser int(11) NOT NULL,
                       idPost int(11) NOT NULL,
                       statut BOOLEAN NOT NULL,
@@ -35,6 +35,6 @@ CREATE TABLE like (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-ALTER TABLE like
+ALTER TABLE `like`
     ADD FOREIGN KEY (idUser) REFERENCES Users(id),
   ADD FOREIGN KEY (idPost) REFERENCES Posts(id);

@@ -24,6 +24,8 @@ class PostDao
                         $post->body = implode("<br>", $array);
                         //Ajouter le nom de l'utilisateur au post
                         $post->created_by = (new UserDao)->get($post->created_by)->username;
+                        //Ajouter les commentaire du post
+                        $post->remarks = (new RemarkDao)->list($post->id);
                 }
 
 
@@ -34,7 +36,9 @@ class PostDao
                 $sql = 'SELECT * FROM posts WHERE id = ?';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$id]);
-                return $stm->fetchAll(PDO::FETCH_CLASS, 'Post')[0]; 
+                $post = $stm->fetchAll(PDO::FETCH_CLASS, 'Post')[0]; 
+                $post->remarks = (new RemarkDao)->list($post->id);
+                return $post;
         }
 
 

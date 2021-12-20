@@ -6,9 +6,8 @@ require_once(ROOT_FOLDER.'DAO/RemarkDao.php');
 
 class PostController extends Controller{
 
-    public function show($id){
-        $post = (new PostDao)->get($id);
-        $this->render('post', compact('post'));
-    }
+
+
+
 
 }

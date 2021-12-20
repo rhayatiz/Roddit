@@ -13,6 +13,20 @@ class LikeController extends Controller
 
     public function getAllLikedPostByUser($idUser)
     {
-        return (new LikeDao())->listByUser($idUser);
+        $data = (new LikeDao())->listByUser($idUser);
+
+        $dataArray = [];
+        foreach ($data as $d)
+        {
+            $temp = array(
+                'idUser' => $d->idUser,
+                'idPost' => $d->idPost,
+                'statut' => $d->statut,
+                'dateLike' => $d->dateLike,
+            );
+
+            array_push($dataArray, $temp);
+        }
+        return $dataArray;
     }
 }

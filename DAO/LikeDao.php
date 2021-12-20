@@ -9,8 +9,8 @@ class LikeDao
         LikeDao::$pdo = DatabasePDO::getInstance();
     }
 
-    function listByUser($userId){//1 - Lire Données
-        $sql='SELECT * FROM `like` WHERE idUser = ? ORDER BY dateLike DESC';
+    function listByUser($userId){
+        $sql='SELECT * FROM `like` INNER JOIN posts p on `like`.idPost = p.id where idUser = ? ORDER BY dateLike DESC';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$userId]);
         return $stm->fetchAll(PDO::FETCH_CLASS, 'Like');

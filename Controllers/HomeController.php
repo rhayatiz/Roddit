@@ -53,20 +53,23 @@ class HomeController extends Controller{
         switch ($view) {
             // Afficher les posts de l'utilisateur
             case 'posts':
+                $page = 'posts';
                 $posts = (new PostDao())->listByUser($user->id);
-                $this->render('profile-posts', compact('user', 'posts'));
+                $this->render('profile-posts', compact('user', 'posts', 'page'));
                 break;
             
             // Afficher les likes (posts likés) de l'utilisateur
             case 'likes':
+                $page = 'likes';
                 $likes = [];
-                $this->render('profile-likes', compact('user', 'likes'));
+                $this->render('profile-likes', compact('user', 'likes', 'page'));
                 break;
 
             // Afficher les likes (posts likés) de l'utilisateur
             case 'comments':
+                $page = 'comments';
                 $comments = [];
-                $this->render('profile-comments', compact('user', 'comments'));
+                $this->render('profile-comments', compact('user', 'comments', 'page'));
                 break;
 
             default:

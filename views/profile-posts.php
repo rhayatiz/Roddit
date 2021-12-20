@@ -17,19 +17,8 @@
 </style>
 
 <div style="margin-top:80px; min-height:calc(100vh - 46px - 80px - 10px) !important;" class="container mx-auto">
-<h4 class="ml-3 my-3 font-weight-light">Profil de <?= $user->username ?></h4>
 
-<ul class="profile-nav nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Posts</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="?page=profile&user=<?= $_GET['user'] ?>&show=comments">Commentaires</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="?page=profile&user=<?= $_GET['user'] ?>&show=likes">Likes</a>
-  </li>
-</ul>
+    <?php include('profile-header.php') ?>
 
     <div class="row mx-auto">
         <div class="col-12 mb-2">

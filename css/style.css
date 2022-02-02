@@ -59,6 +59,39 @@ a.no-link-decoration:hover {
     text-decoration: none;
 }
 
+
+.btnLike{
+    cursor: pointer;
+    outline: 0;
+    color: #AAA;
+
+}
+
+.btnLike:focus {
+    outline: none;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}
+
+/** profile posts css **/
+.post-title {
+background-color: #d9d9d9;
+color: #000;
+}
+.post-body {
+max-height: 80px;
+overflow: hidden;
+background-color: #f7f7f7;
+color: #141414;
+}
+.no-hover-decoration:hover{
+text-decoration: none !important;
 .orange {
     color: #fd7e14;
 }

@@ -10,4 +10,9 @@ class PostController extends Controller{
         $this->render('post', compact('post'));
     }
 
+    public function createPost($titre,$text)
+    {
+        (new PostDao())->create($titre,$text);
+        header('Location: index.php');
+    }
 }

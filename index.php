@@ -13,6 +13,7 @@ require('helpers' . DIRECTORY_SEPARATOR . 'functions.php');
 require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
+require('controllers' . DIRECTORY_SEPARATOR . 'LikeController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
@@ -91,6 +92,38 @@ switch ($page) {
         }
         break;
 
+    case 'like':
+        if(isset($_GET['idUser']) && isset($_GET['statut']) && $_GET['statut'] == 'getAll')
+        {
+            $data = (new LikeController())->getAllLikedPostByUser($_GET['idUser']);
+            header('Content-type: application/json');
+            echo json_encode($data);
+        }
+        elseif(isset($_GET['idPost']) && $_GET['idUser'] && $_GET['statut'])
+        {
+             $data = (new LikeController())->actionLikePost($_GET['idUser'], $_GET['idPost'], $_GET['statut']);
+            header('Content-type: application/json');
+            echo json_encode($data);
+        }
+
+    case 'newPost':
+        if(Auth::user())
+        {
+            (new HomeController())->newPost();
+        }
+        else
+        {
+            (new HomeController())->index();
+        }
+        break;
+
+    case 'creatPost':
+        // ---- POST (tentative de connexion)
+        if(isset($_POST['postForm']))
+        {
+            (new PostController())->createPost($_POST['titre'], $_POST['postText']);
+        }
+        
     case 'messages':
         (new MessageController())->index();
         break;

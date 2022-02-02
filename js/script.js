@@ -9,7 +9,8 @@ function actionLikePost(idUser, idPost, statut)
         success:function(data) {
             if(data)
             {
-                changebtnLike(idPost, data.data);
+                var nbLike = data.nbLike - data.nbDislike;
+                changebtnLike(idPost, data.data, nbLike);
             }
         },
     });
@@ -30,10 +31,11 @@ function getAllLikePostByUser(idUser, statut)
     });
 }
 
-function changebtnLike(idPost, statut)
+function changebtnLike(idPost, statut, like)
 {
     var btnLike = document.querySelector('#btnLike_' + idPost);
     var btnDislike = document.querySelector('#btnDislike_' + idPost);
+    var nbLike = document.querySelector('#allLike_' + idPost);
 
     if(statut == '2')
     {
@@ -58,4 +60,9 @@ function changebtnLike(idPost, statut)
             btnDislike.classList.remove('red');
         }
     }
+
+    if (like === undefined) {
+        like = 0;
+    }
+    nbLike.innerHTML = like;
 }

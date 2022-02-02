@@ -13,7 +13,21 @@ class PostDao
         }
 
         function list(){//1 - Lire Données
-                $sql='SELECT * FROM posts ORDER BY id DESC';
+                $sql='SELECT
+                            *, 
+                        (SELECT COUNT(*) 
+                            FROM `like` 
+                            WHERE idPost = posts.id 
+                              and `like`.statut = 2) as nbLike, 
+                        (SELECT COUNT(*) 
+                            FROM `like` 
+                            WHERE idPost = posts.id 
+                                and `like`.statut = 1) as nbDislike
+                        FROM
+                             posts
+                        ORDER BY
+                                 id
+                        DESC';
                 $stm = self::$pdo->query($sql);
                 $posts = $stm->fetchAll(PDO::FETCH_CLASS, 'Post'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
 
@@ -52,11 +66,10 @@ class PostDao
 
         function listLikedPostsByUser($userId){
                 //1 - Lire Données
-                $sql='SELECT * FROM posts WHERE created_by = ? 
-                AND posts.id IN (select idPost from `like` where statut = 2 and idUser = ?)
+                $sql='SELECT * FROM posts WHERE posts.id IN (select idPost from `like` where statut = 2 and idUser = ?)
                 ORDER BY id DESC';
                 $stm = self::$pdo->prepare($sql);
-                $stm->execute([$userId, $userId]);
+                $stm->execute([$userId]);
                 $posts = $stm->fetchAll(PDO::FETCH_CLASS, 'Post'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
 
                 //TODO, add put next logic postRepository instead of DAO

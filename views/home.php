@@ -4,7 +4,7 @@
     <div class="row mx-auto">
         <div class="col-12 col-md-9">
 
-            <?php foreach ($posts as $post) { ?>
+            <?php foreach ($posts as $post) {;?>
                 <div class="card mt-3">
                     <div class="card-header font-weight-bold">
                         <a href="?page=post&id=<?= $post->id ?>">
@@ -19,6 +19,7 @@
                         </blockquote>
                         <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
                             <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                            <span class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
                             <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
                         <?php } ?>
                     </div>

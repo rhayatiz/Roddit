@@ -39,9 +39,7 @@ class LikeDao
                 $stmAdd = self::$pdo->prepare($sqlAdd);
                 $stmAdd->execute([$idUser, $idPost, 2, $dateTime]);
 
-                $msg = array(
-                    'data' => '2',
-                );
+                $data = '2';
             }
             // Si dislike
             else
@@ -52,9 +50,7 @@ class LikeDao
                 $stmAdd = self::$pdo->prepare($sqlAdd);
                 $stmAdd->execute([$idUser, $idPost, 1, $dateTime]);
 
-                $msg = array(
-                    'data' => '1',
-                );
+                $data = '1';
             }
         }
         else
@@ -66,9 +62,7 @@ class LikeDao
                 $stmRemove = self::$pdo->prepare($sqlRemove);
                 $stmRemove->execute([$idUser, $idPost]);
 
-                $msg = array(
-                    'data' => '0',
-                );
+                $data = '0';
             }
             // Sinon mettre a j
             else
@@ -77,12 +71,20 @@ class LikeDao
                 $stmRemove = self::$pdo->prepare($sqlRemove);
                 $stmRemove->execute([$statut, $idUser, $idPost]);
 
-                $msg = array(
-                    'data' => $statut,
-                );
+                $data = $statut;
             }
         }
 
-        return $msg;
+        // Récupérer les info pour le retour
+        $sql='SELECT *, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = idPost and `like`.statut = 2) as nbLike, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = idPost and `like`.statut = 1) as nbDislike FROM `like` WHERE idPost = ?';
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute([$idPost]);
+        $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
+
+        return array(
+            'data' => $data,
+            'nbLike' => $dataFromBdd[0]->nbLike,
+            'nbDislike' => $dataFromBdd[0]->nbDislike,
+        );
     }
 }

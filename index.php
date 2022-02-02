@@ -106,7 +106,6 @@ switch ($page) {
         }
         break;
 
-
     default:
         $controller = new HomeController();
         $controller->error('Page Not Found');

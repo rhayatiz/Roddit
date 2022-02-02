@@ -104,6 +104,23 @@ switch ($page) {
             header('Content-type: application/json');
             echo json_encode($data);
         }
+    case 'newPost':
+        if(Auth::user())
+        {
+            (new HomeController())->newPost();
+        }
+        else
+        {
+            (new HomeController())->index();
+        }
+        break;
+
+    case 'creatPost':
+        // ---- POST (tentative de connexion)
+        if(isset($_POST['postForm']))
+        {
+            (new PostController())->createPost($_POST['titre'], $_POST['postText']);
+        }
         break;
 
 

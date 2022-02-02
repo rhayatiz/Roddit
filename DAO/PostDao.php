@@ -90,4 +90,16 @@ class PostDao
                         return 'Enregistrement supprimé!';
                 }
         }
+
+        function create($titre,$text)
+        {
+                $sql = 'INSERT INTO posts(title,body,created_at,created_by) VALUE(?,?,?,?)';
+                $stm = self::$pdo->prepare($sql);
+                $args = array($titre,$text,date("Y-m-d"),$_SESSION['userId']);
+                $stm->execute($args);
+                
+                if($stm->rowCount()>0){
+                return self::$pdo->lastInsertId();
+                }
+        }
 }

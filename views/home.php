@@ -13,7 +13,8 @@
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                        <p><?= $post->body ?></p>
+                            <!-- CHange overlow pour avoir un button "see all" -->
+                        <p class="overflow-hidden" style="max-height: 300px;"><?= $post->body ?></p>
                         <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par <cite title="Source Title"><?= $post->created_by ?></cite></footer>
                         </blockquote>
                         <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
@@ -52,13 +53,18 @@
                         </a>
                     </div>
                 </div>
+                <br><br>
+                <div class="row d-flex mt-1">
+                    <div class="btn btn-sm btn-outline-secondary mx-auto w-75">
+                        <a class="no-link-decoration" href="?page=newPost"><i class="far fa-edit mr-1"></i>Créer un post</a>
+                    </div>
+                </div>
             </div>
         <?php } ?>
 
     </div>
 
 
-</div>
 </div>
 
 <?php include('shared/footer.php'); ?>

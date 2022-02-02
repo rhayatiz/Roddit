@@ -99,4 +99,8 @@ class HomeController extends Controller{
     }
 
 
+    public function newPost(){
+        $this->render('new_post');
+    }
+
 }

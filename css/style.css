@@ -66,3 +66,18 @@ a.no-link-decoration:hover {
 .bg-orange {
     background-color: #fd7e14;
 }
+
+.btn-msg-inactive {
+    border: 1px solid grey;
+}
+
+.menu-messagerie {
+    padding: 10px 0;
+}
+.menu-messagerie div {
+    font-size: .9rem;
+}
+
+.menu-messagerie div:hover {
+    cursor: pointer;
+}

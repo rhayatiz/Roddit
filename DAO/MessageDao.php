@@ -1,5 +1,5 @@
 <?php
-include(ROOT_FOLDER.'/models/Post.php');
+include(ROOT_FOLDER.'/models/Message.php');
 
 /**
  * MessageDao : CRUD

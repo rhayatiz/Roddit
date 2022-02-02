@@ -13,6 +13,7 @@ require('helpers' . DIRECTORY_SEPARATOR . 'functions.php');
 require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
+require('controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
@@ -91,7 +92,7 @@ switch ($page) {
         break;
 
     case 'messages':
-        (new MessagesController())->index();
+        (new MessageController())->index();
         break;
 
 

@@ -1,12 +1,12 @@
 
-<nav class="navbar navbar-expand-md navbar-dark bg-white shadow fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-white shadow sticky-top">
     <div class="container">
         <a id="logo" class="navbar-brand text-dark mr-5" href="index.php">Roddit</a>
         
         <div class="row d-flex">
             <?php if(Auth::user() != null){ //Utilisateur connecté ?>
                 <div class="text-secondary font-weight-light my-auto mr-4">
-                    <a href="?page=profile&user=<?= Auth::user()->username ?>&show=messages" class="no-link-decoration">
+                    <a id="btn-messages" href="?page=messages" class="no-link-decoration">
                         <span>
                             <i class="fas fa-inbox"></i>
                         </span>

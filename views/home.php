@@ -1,6 +1,6 @@
 <?php include('shared/header.php');?>
 
-<div style="margin-top:100px" class="container mx-auto">
+<div style="margin-top:30px" class="container mx-auto">
     <div class="row mx-auto">
         <div class="col-12 col-md-9">
 

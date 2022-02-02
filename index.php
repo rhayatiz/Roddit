@@ -104,6 +104,7 @@ switch ($page) {
             header('Content-type: application/json');
             echo json_encode($data);
         }
+        break;
     case 'newPost':
         if(Auth::user())
         {

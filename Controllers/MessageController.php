@@ -35,7 +35,7 @@ class MessageController extends Controller{
     }
     
     public function showForm(){
-        $this->render('messagerie-new');
+        $this->render('messagerie-new-message');
     }
 
 }

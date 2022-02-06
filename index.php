@@ -133,6 +133,14 @@ switch ($page) {
         (new MessageController())->listSent();
         break;
 
+    case 'messages-new':
+        (new MessageController())->showForm();
+        break;
+        
+    case 'messages-deleted':
+        (new MessageController())->listDeleted();
+        break;
+
 
     default:
         $controller = new HomeController();

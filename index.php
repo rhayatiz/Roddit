@@ -124,10 +124,21 @@ switch ($page) {
             (new PostController())->createPost($_POST['titre'], $_POST['postText']);
         }
         
-    case 'messages':
+    case 'messages-inbox':
         (new MessageController())->index();
         break;
 
+    case 'messages-sent':
+        (new MessageController())->listSent();
+        break;
+
+    case 'messages-deleted':
+        (new MessageController())->listDeleted();
+        break;
+
+    case 'messages-new':
+        (new MessageController())->showForm();
+        break;
 
     default:
         $controller = new HomeController();

@@ -18,13 +18,30 @@ require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'controllers' 
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
-switch ($_GET['action']) {
-    case 'unread':
-        header('Content-type: application/json');
-        echo (new MessageController)->index();
-    break;
-}
-
+// api/messages/
+if(!isset($_GET['get'])){
+    //retourner la liste des messages reçus par l'user connecté
+    header('Content-type: application/json');
+    echo json_encode([
+        'unreadCount' => (new MessageController)->getUnreadMessagesCount()
+        ]);
+}else{
+    switch ($_GET['get']) {
+        // api/message/index.php?get=unread
+        case 'unread':
+            header('Content-type: application/json');
+            echo json_encode([
+                'data' => (new MessageController)->getUnreadMessages()
+            ]);
+            break;
+        case 'unreadCount':
+            header('Content-type: application/json');
+            echo json_encode([
+                'unreadCount' => (new MessageController)->getUnreadMessagesCount()
+            ]);
+            break;
+        }
+}   
 
 // header('Content-type: application/json');
 

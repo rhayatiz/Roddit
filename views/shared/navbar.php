@@ -6,11 +6,11 @@
         <div class="row d-flex">
             <?php if(Auth::user() != null){ //Utilisateur connecté ?>
                 <div class="text-secondary font-weight-light my-auto mr-4">
-                    <a id="btn-messages" href="?page=messages" class="no-link-decoration">
+                    <a id="btn-messages" href="?page=messages-inbox" class="no-link-decoration">
                         <span>
-                            <i class="fas fa-inbox"></i>
+                            <i id="inbox-logo" class="fas fa-inbox"></i>
                         </span>
-                        Messages (0)
+                        Messages (<span id="inbox-unread">-</span>)
                     </a>
                 </div>
 

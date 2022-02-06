@@ -72,11 +72,15 @@ a.no-link-decoration:hover {
 }
 
 .green{
-    color: green;
+    color: rgb(49, 131, 49);
 }
 
 .red{
-    color: red;
+    color: rgb(252, 39, 39);
+}
+
+.orange {
+    color: rgb(253, 86, 25);
 }
 
 /** profile posts css **/
@@ -102,6 +106,12 @@ text-decoration: none !important;
 
 .btn-msg-inactive {
     border: 1px solid grey;
+}
+
+.btn-msg-active {
+    border: 1px solid rgb(110, 173, 255) !important;
+    background-color: rgb(6, 86, 190) !important;
+    color: white;
 }
 
 .menu-messagerie {

@@ -14,6 +14,7 @@ require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
 require('controllers' . DIRECTORY_SEPARATOR . 'LikeController.php');
+require('controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 
@@ -104,6 +105,7 @@ switch ($page) {
             header('Content-type: application/json');
             echo json_encode($data);
         }
+
         break;
     case 'newPost':
         if(Auth::user())
@@ -122,7 +124,15 @@ switch ($page) {
         {
             (new PostController())->createPost($_POST['titre'], $_POST['postText']);
         }
+        
+    case 'messages-inbox':
+        (new MessageController())->index();
         break;
+
+    case 'messages-sent':
+        (new MessageController())->listSent();
+        break;
+
 
     default:
         $controller = new HomeController();

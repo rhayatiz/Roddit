@@ -63,7 +63,8 @@ a.no-link-decoration:hover {
 .btnLike{
     cursor: pointer;
     outline: 0;
-    color: #AAA;
+    border: none;
+    background: none;
 
 }
 

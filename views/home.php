@@ -18,9 +18,15 @@
                         <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par <cite title="Source Title"><?= $post->created_by ?></cite></footer>
                         </blockquote>
                         <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
-                            <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-                            <span class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
-                            <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                            <div>
+                                <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fas fa-arrow-up"></i></button>
+                            </div>
+                            <div>
+                                <span style="position: relative; right: -8px" class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
+                            </div>
+                            <div>
+                                <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fas fa-arrow-down"></i></button>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>

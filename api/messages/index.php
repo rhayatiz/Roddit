@@ -17,11 +17,13 @@ require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helpers' . DI
 require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
+// Répondre Que si l'utilisateur est connecté
+if(!Auth::user()){ echo 'Unauthorized access'; die;}
 
 // api/messages/
 if(!isset($_GET['get'])){
     // POST
-    
+
 }else{
     switch ($_GET['get']) {
         // api/message/index.php?get=unread
@@ -31,6 +33,7 @@ if(!isset($_GET['get'])){
                 'data' => (new MessageController)->getUnreadMessages()
             ]);
             break;
+        
         case 'unreadCount':
             header('Content-type: application/json');
             echo json_encode([
@@ -39,6 +42,8 @@ if(!isset($_GET['get'])){
             break;
         }
 }   
+
+
 
 // header('Content-type: application/json');
 

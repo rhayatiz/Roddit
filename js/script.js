@@ -66,3 +66,35 @@ function changebtnLike(idPost, statut, like)
     }
     nbLike.innerHTML = like;
 }
+
+
+// Inbox
+function getUnreadMessagesCount(){
+    let currentVal = document.getElementById('inbox-unread').textContent;
+    $.ajax({
+        type: 'POST',          //La méthode cible (POST ou GET)
+        url : './api/messages/index.php?get=unreadCount', //Script Cible
+        dataType: 'json',
+        success:function(data) {
+            if (data.unreadCount != currentVal){
+                $('#inbox-unread').text(data.unreadCount);
+                $('#inbox-logo').addClass('orange');
+            }
+        },
+    });
+}
+
+
+/********************************************
+ *
+ ************ Document ready *****************
+ *
+ ********************************************/
+$(document).ready(function() {
+
+    getUnreadMessagesCount();
+    const interval = setInterval(function() {
+        getUnreadMessagesCount();
+    }, 5000);
+
+});

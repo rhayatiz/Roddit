@@ -12,9 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/fe459689b4.js"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
     <title>Roddit<?= isset($page_title) ? ' - ' . $page_title : '' ?></title>
 </head>

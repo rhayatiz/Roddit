@@ -1,5 +1,5 @@
 <?php require_once('header.php');?>
-<style>
+    <style>
     body{
         height: calc(100vh - 46px);
     }

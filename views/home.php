@@ -11,23 +11,25 @@
                             <?= $post->title ?>
                         </a>
                     </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
+                    <div class="card-body row">
+                        <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
+                            <div class="col-1">
+                                <div>
+                                    <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fas fa-arrow-up"></i></button>
+                                </div>
+                                <div>
+                                    <span style="position: relative; right: -8px;white-space: nowrap" class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
+                                </div>
+                                <div>
+                                    <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <blockquote class="col blockquote mb-0">
                             <!-- CHange overlow pour avoir un button "see all" -->
                         <p class="overflow-hidden" style="max-height: 300px;"><?= $post->body ?></p>
                         <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par <cite title="Source Title"><?= $post->created_by ?></cite></footer>
                         </blockquote>
-                        <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
-                            <div>
-                                <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fas fa-arrow-up"></i></button>
-                            </div>
-                            <div>
-                                <span style="position: relative; right: -8px" class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
-                            </div>
-                            <div>
-                                <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fas fa-arrow-down"></i></button>
-                            </div>
-                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>

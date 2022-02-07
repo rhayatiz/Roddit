@@ -12,13 +12,15 @@ require('shared/messagerie-header.php');
                 <div class="suggestions">
                     <ul></ul>
                 </div>
+                <input type="hidden" id="destinataireId" name="destinataireId" value="">
         </div>
     </div>
     <!-- Fin destinataire -->
-    <input class="form-control p-4" type="text" placeholder="Sujet">
-    <textarea class="form-control mt-2" name="" id="" cols="30" rows="10"></textarea>
+    <input class="form-control p-4" type="text" placeholder="Sujet" id="subject">
+    <textarea class="form-control mt-2" rows="10" id="message"></textarea>
 
-    <button class="btn btn-sm btn-primary w-100 mt-2">Envoyer</button>
+    <span id="errorInputs" class="d-none col-12 px-0 text-danger font-weight-small" style="font-size:12px">Veuillez renseigner tout les champs</span>
+    <button onclick="sendMessage()"class="btn btn-sm btn-primary w-100 mt-2">Envoyer</button>
 
 </div>
 <?php include('shared/messagerie-footer.php');?>
@@ -45,7 +47,14 @@ require('shared/messagerie-header.php');
         return results;
     }
 
-
+    function getUserId(str){
+        const val = str.toLowerCase();
+        for (i = 0; i < users.length; i++) {
+            if (users[i]['username'].toLowerCase().indexOf(val) > -1) {
+                return users[i]['id'];
+            }
+        }
+    }
 
     function searchHandler(e) {
         const inputVal = e.currentTarget.value;
@@ -80,7 +89,10 @@ require('shared/messagerie-header.php');
         input.focus();
         suggestions.innerHTML = '';
         suggestions.classList.remove('has-suggestions');
+        // Mettre l'id de l'utilisateur dans l'input caché destinataireId
+        $("#destinataireId").val(getUserId(e.target.innerText))
     }
+    
     // attendre un peu avant de charger les suggestions
     function delay(callback, ms) {
         var timer = 0;
@@ -97,6 +109,52 @@ require('shared/messagerie-header.php');
         searchHandler(e);
         }, 150)
     );
+
+    function validateForm(){
+        let destinataireId = $('#destinataireId').val();
+        let subject = $('#subject').val();
+        let message = $('#message').val();
+
+        if(destinataireId == "" ||
+            subject == "" ||
+            message == ""){
+                if(destinataireId == ""){
+                    $('#userSearch').addClass('is-invalid');
+                }else{
+                    $('#userSearch').removeClass('is-invalid');
+                }
+                
+                if(subject == ""){
+                    $('#subject').addClass('is-invalid');
+                }else{
+                    $('#subject').removeClass('is-invalid');
+                }
+                
+                if(message == ""){
+                    $('#message').addClass('is-invalid');
+                }else{
+                    $('#message').removeClass('is-invalid');
+                }
+            return false;
+        }else{
+            return data =
+                {
+                    "destinataireId": destinataireId,
+                    "subject": subject,
+                    "message": message
+                }
+        }
+    }
+
+    function sendMessage(){
+        if(data = validateForm()){
+            // Envoyer le message
+            console.log('sending message');
+            console.log(data);
+        }else{
+            $("#errorInputs").removeClass('d-none');
+        }
+    }
 
     suggestions.addEventListener('click', useSuggestion);
 </script>

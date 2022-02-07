@@ -27,6 +27,14 @@ class UserDao
         return $users;
 	}
 
+    function findAllExcept($id){//1 - Lire Données
+        $sql='SELECT * FROM users WHERE id != ?';
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute([$id]);
+        $users = $stm->fetchAll(PDO::FETCH_CLASS); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+        return $users;
+	}
+
 	function get($id){
         $sql = 'SELECT * FROM users WHERE id = ?';
         $stm = self::$pdo->prepare($sql);

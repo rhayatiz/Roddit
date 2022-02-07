@@ -14,7 +14,7 @@ if(!isset($_SESSION)){session_start();};
 require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'functions.php');
 require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'DAO' . DIRECTORY_SEPARATOR . 'UserDao.php');
 require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
-require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
+require('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'UserController.php');
 include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 // Répondre Que si l'utilisateur est connecté
@@ -24,22 +24,8 @@ if(!Auth::user()){ echo 'Unauthorized access'; die;}
 
 if(!isset($_GET['get'])){
     // api/users
-    $data = [
-        [
-            'id' => 1,
-            'username' => 'johnDoe'
-        ],
-        [
-            'id' => 2,
-            'username' => 'Mario'
-        ],
-        [
-            'id' => 3,
-            'username' => 'Baptiste'
-        ]
-    ];
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($data);
+    echo json_encode((new UserController())->allExceptCurrent());
 }else{
 }   
 

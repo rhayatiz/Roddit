@@ -20,11 +20,8 @@ include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 // api/messages/
 if(!isset($_GET['get'])){
-    //retourner la liste des messages reçus par l'user connecté
-    header('Content-type: application/json');
-    echo json_encode([
-        'unreadCount' => (new MessageController)->getUnreadMessagesCount()
-        ]);
+    // POST
+    
 }else{
     switch ($_GET['get']) {
         // api/message/index.php?get=unread

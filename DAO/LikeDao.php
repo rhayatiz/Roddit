@@ -81,10 +81,21 @@ class LikeDao
         $stm->execute([$idPost]);
         $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
 
-        return array(
-            'data' => $data,
-            'nbLike' => $dataFromBdd[0]->nbLike,
-            'nbDislike' => $dataFromBdd[0]->nbDislike,
-        );
+        if(empty($dataFromBdd))
+        {
+            return array(
+              'data' => $data,
+                'nbLike' => null,
+                'nbDislike' => null,
+            );
+        }
+        else
+        {
+            return array(
+                'data' => $data,
+                'nbLike' => $dataFromBdd[0]->nbLike,
+                'nbDislike' => $dataFromBdd[0]->nbDislike,
+            );
+        }
     }
 }

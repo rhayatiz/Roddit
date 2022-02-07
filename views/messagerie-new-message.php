@@ -10,7 +10,7 @@ require('shared/messagerie-header.php');
         <div class="form-group">
             <input class="form-control p-4" type="text" name="destinataire" id="userSearch" placeholder="Destinataire ...">
                 <div class="suggestions">
-                    <ul></ul>
+                    <ul class="suggestion"></ul>
                 </div>
                 <input type="hidden" id="destinataireId" name="destinataireId" value="">
         </div>

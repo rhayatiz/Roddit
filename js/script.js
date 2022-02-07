@@ -23,15 +23,31 @@ function getAllLikePostByUser(idUser, statut)
         url : './index.php?page=like&idUser=' + idUser + '&statut=' + statut, //Script Cible
         dataType: 'json',
         success:function(data) {
-
             data.forEach(function(d) {
-                changebtnLike(d.idPost, d.statut);
+                // if(d.nbLike != null && d.nbDislike != null)
+                // {
+                //     var nbLike = d.nbLike - d.nbDislike;
+                // }
+                // else if (d.nbLike == null && d.nbDislike != null)
+                // {
+                //     var nbLike = 0 - d.nbDislike;
+                // }
+                // else if (d.nbLike != null && d.nbDislike == null)
+                // {
+                //     var nbLike = d.nbLike - 0;
+                // }
+                // else
+                // {
+                //     var nbLike = 0;
+                // }
+                // console.log(nbLike);
+                changebtnLike(d.idPost, d.statut, null);
             });
         },
     });
 }
 
-function changebtnLike(idPost, statut, like)
+function changebtnLike(idPost, statut, like = "0")
 {
     var btnLike = document.querySelector('#btnLike_' + idPost);
     var btnDislike = document.querySelector('#btnDislike_' + idPost);
@@ -63,8 +79,20 @@ function changebtnLike(idPost, statut, like)
 
     if (like === undefined) {
         like = 0;
+        nbLike.innerHTML = like;
     }
-    nbLike.innerHTML = like;
+    else if(like == null)
+    {
+
+    }
+    else
+    {
+        nbLike.innerHTML = like;
+    }
+
+
+
+
 }
 
 

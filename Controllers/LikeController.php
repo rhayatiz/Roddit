@@ -23,6 +23,8 @@ class LikeController extends Controller
                 'idPost' => $d->idPost,
                 'statut' => $d->statut,
                 'dateLike' => $d->dateLike,
+                'nbLike' =>$d->nbLike,
+                'nbDislike' =>$d->nbDislike,
             );
 
             array_push($dataArray, $temp);

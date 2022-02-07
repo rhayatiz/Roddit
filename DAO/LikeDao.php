@@ -14,8 +14,8 @@ class LikeDao
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$userId]);
         return $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
-    }
 
+    }
 
     // statut
     // 0 = a supprimer
@@ -76,9 +76,9 @@ class LikeDao
         }
 
         // Récupérer les info pour le retour
-        $sql='SELECT *, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = idPost and `like`.statut = 2) as nbLike, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = idPost and `like`.statut = 1) as nbDislike FROM `like` WHERE idPost = ?';
+        $sql='SELECT *, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = ? and `like`.statut = 2) as nbLike, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = ? and `like`.statut = 1) as nbDislike FROM `like` WHERE idPost = ?';
         $stm = self::$pdo->prepare($sql);
-        $stm->execute([$idPost]);
+        $stm->execute([$idPost, $idPost, $idPost]);
         $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
 
         if(empty($dataFromBdd))

@@ -25,7 +25,20 @@ class MessageDao
                 $stm->execute([$userId]);
                 $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, 'Message'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
                 foreach ($unreadMessages as $k=>$message) {
-                        //Ajouter le nom de l'utilisateur au post
+                        //Ajouter le nom de l'utilisateur au message
+                        $message->sender = (new UserDao)->get($message->sender_id)->username;
+                }
+                return $unreadMessages;
+
+        }
+
+        function getUserMessages($userId){
+                $sql = 'SELECT * FROM messages WHERE recipient_id = ?';
+                $stm = self::$pdo->prepare($sql);
+                $stm->execute([$userId]);
+                $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, 'Message'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                foreach ($unreadMessages as $k=>$message) {
+                        //Ajouter le nom de l'utilisateur au message
                         $message->sender = (new UserDao)->get($message->sender_id)->username;
                 }
                 return $unreadMessages;

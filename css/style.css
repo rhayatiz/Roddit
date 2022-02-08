@@ -131,7 +131,51 @@ text-decoration: none !important;
     cursor: pointer;
 }
 
-
+/*********************************
+* Messagerie spinner
+**/
+.wrapper-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .spinner * {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: #f50057;
+    border-radius: 1rem;
+    margin: 0 0.2rem;
+  }
+  .spinner .spinner-1 {
+    animation: fade 1.1s ease-in-out 0.18s infinite both;
+  }
+  .spinner .spinner-2 {
+    animation: fade 1.1s ease-in-out 0.36s infinite both;
+  }
+  .spinner .spinner-3 {
+    animation: fade 1.1s ease-in-out 0.54s infinite both;
+  }
+  @keyframes fade {
+    0% {
+      opacity: 0.35;
+      transform: scale(0.87);
+    }
+    37.5% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    75% {
+      opacity: 0.35;
+      transform: scale(0.87);
+    }
+    100% {
+      opacity: 0.35;
+      transform: scale(0.87);
+    }
+  }
+  
 /******************************
 **
 **      Messagerie autocomplete destinataire
@@ -177,3 +221,51 @@ ul.suggestion li {
 ul.suggestion li:hover {
   background-color: #e65c00;
 }
+
+/**************
+* Message
+**************/
+.message-wrapper:hover{
+    cursor: pointer;
+    filter: opacity(100%);
+}
+.message-wrapper:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.message-wrapper{
+    filter: opacity(75%);
+}
+
+.message-preview {
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-preview:after {
+    content: "...";
+    position: absolute;
+    right: 14px;
+    bottom: 11px;
+    padding: 0 5px;
+    letter-spacing: 3px;
+  }
+
+
+  .message-not-read {
+    background-color: #d5ffe8 !important;
+  }
+
+  [aria-current="page"] {
+    text-decoration: none;
+    color: black;
+  }
+
+  [aria-current="page"]:hover {
+    text-decoration: none;
+  }
+
+  .no-click {
+    /* pointer-events: none !important; */
+  }

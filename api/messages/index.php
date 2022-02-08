@@ -19,32 +19,44 @@ include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
 
 // Répondre Que si l'utilisateur est connecté
 if(!Auth::user()){ echo 'Unauthorized access'; die;}
-
-// api/messages/
-if(!isset($_GET['get'])){
-    // POST
-
-}else{
-    switch ($_GET['get']) {
-        // api/message/index.php?get=unread
-        case 'unread':
-            header('Content-type: application/json');
-            echo json_encode([
-                'data' => (new MessageController)->getUnreadMessages()
-            ]);
-            break;
-        
-        case 'unreadCount':
-            header('Content-type: application/json');
-            echo json_encode([
-                'unreadCount' => (new MessageController)->getUnreadMessagesCount()
-            ]);
-            break;
-        }
-}   
+/*****************
+ * POST
+ *  */ 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
-
-// header('Content-type: application/json');
+/*****************
+ * GET
+ *  */ 
+}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+    if(isset($_GET['get'])){
+        switch ($_GET['get']) {
+            // api/message/index.php?get=unread
+            case 'unread':
+                header('Content-type: application/json');
+                echo json_encode([
+                    'data' => (new MessageController)->getUnreadMessages()
+                ]);
+                break;
+            
+            case 'unreadCount':
+                header('Content-type: application/json');
+                echo json_encode([
+                    'unreadCount' => (new MessageController)->getUnreadMessagesCount()
+                ]);
+                break;
+            }
+    /*****************
+     * /api/messages
+     * Tous les messages reçus par l'utilisateur
+     *  */ 
+    }else{
+        $data = (new MessageController)->all();
+        header('Content-type: application/json');
+        echo json_encode([
+            'data' => (new MessageController)->all()
+        ]);
+    }
+}
 
 ?>

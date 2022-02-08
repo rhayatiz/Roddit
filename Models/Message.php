@@ -19,10 +19,12 @@ class Message extends Model implements JsonSerializable {
     */
     public function jsonSerialize() {
         return Array(
+           'id' => $this->id,
            'subject' => $this->subject,
            'body'   => $this->body,
            'created_at'   => $this->created_at,
            'sender'   => $this->sender,
+           'is_read'   => $this->is_read,
         //    'obj'    => $this->obj->jsonSerialize(), // example for other objects
         //    'time'   => $this->time
         );

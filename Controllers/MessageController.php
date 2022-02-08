@@ -16,9 +16,9 @@ class MessageController extends Controller{
         return $unreadMessages;
     }
 
-    // get unread messages
+    // get user messages
     public function all(){
-        $messages = (new MessageDao)->findAll(Auth::user()->id);
+        $messages = (new MessageDao)->getUserMessages(Auth::user()->id);
         return $messages;
     }
 

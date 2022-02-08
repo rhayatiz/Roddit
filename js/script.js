@@ -100,8 +100,8 @@ function changebtnLike(idPost, statut, like = "0")
 function getUnreadMessagesCount(){
     let currentVal = document.getElementById('inbox-unread').textContent;
     $.ajax({
-        type: 'POST',          //La méthode cible (POST ou GET)
-        url : './api/messages/index.php?get=unreadCount', //Script Cible
+        type: 'GET',          //La méthode cible (POST ou GET)
+        url : 'api/messages/index.php?get=unreadCount', //Script Cible
         dataType: 'json',
         success:function(data) {
             if (data.unreadCount != currentVal){

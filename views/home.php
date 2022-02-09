@@ -28,7 +28,9 @@
                         <blockquote class="col blockquote mb-0">
                             <!-- CHange overlow pour avoir un button "see all" -->
                         <p class="overflow-hidden" style="max-height: 300px;"><?= $post->body ?></p>
-                        <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par <cite title="Source Title"><?= $post->created_by ?></cite></footer>
+                        <footer class="blockquote-footer">Créé le <?= $post->created_at ?> par 
+                            <a href="index.php?page=profile&user=<?= $post->created_by ?>"><cite title="Source Title"><?= $post->created_by ?></cite></a>
+                        </footer>
                         </blockquote>
                     </div>
                 </div>

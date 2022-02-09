@@ -44,4 +44,20 @@ class MessageDao
                 return $unreadMessages;
 
         }
+
+        function get($id){
+                $sql = 'SELECT * FROM messages WHERE id = ?';
+                $stm = self::$pdo->prepare($sql);
+                $stm->execute([$id]);
+                if($stm->rowCount()>0){
+                        return $stm->fetchAll(PDO::FETCH_CLASS, 'Message')[0]; 
+                }
+                return null;
+        }
+
+        function read($id){
+                $sql = 'UPDATE messages SET is_read = 1 where id = ?';
+                $stm = self::$pdo->prepare($sql);
+                $stm->execute([$id]);
+        }
 }

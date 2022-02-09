@@ -22,6 +22,14 @@ class MessageController extends Controller{
         return $messages;
     }
 
+    // get specific message by id
+    public function get($id){
+        //Lire le message
+        (new MessageDao)->read($id);
+        $message = (new MessageDao)->get($id);
+        $this->render('messagerie-message', compact('message'));
+    }
+
     public function index(){
         $this->render('messagerie-inbox');
     }

@@ -125,6 +125,9 @@ switch ($page) {
             (new PostController())->createPost($_POST['titre'], $_POST['postText']);
         }
         
+    /*****************
+     *  Messages
+    *****************/
     case 'messages-inbox':
         (new MessageController())->index();
         break;
@@ -140,6 +143,11 @@ switch ($page) {
     case 'messages-deleted':
         (new MessageController())->listDeleted();
         break;
+    case 'message':
+        if(isset($_GET['id'])){
+            (new MessageController())->get($_GET['id']);
+            break;
+        }
 
 
     default:

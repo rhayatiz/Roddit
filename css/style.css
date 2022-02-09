@@ -269,3 +269,15 @@ ul.suggestion li:hover {
   .no-click {
     /* pointer-events: none !important; */
   }
+
+  #reply-wrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #e6e6e6;
+    padding: 10px;
+  }
+
+  #reply-textarea {
+    font-size: .875rem;
+  }

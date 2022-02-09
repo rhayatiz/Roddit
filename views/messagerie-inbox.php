@@ -3,16 +3,27 @@ $page = 'inbox';
 require('shared/messagerie-header.php');
 ?>
 <div class="col p-0 h-100" style="overflow:hidden">
-    <div class="wrapper p-2 h-100">
-        <div class="row menu border-bottom pb-2">
-            <div class="col-1 mx-2"><input type="checkbox" onclick="selectAllMessages(this)" style="transform: scale(1.5);"></div>
-            <div class="col-1"><i class="fas fa-sync" style="font-size:24px"></i></div>
-            <div class="col-1"><i class="fas fa-trash-alt" style="font-size:24px"></i></div>
+    <div class="wrapper h-100">
+        <div class="row menu border-bottom p-2">
+            <div class="col-1 ml-1">
+                <div class="btn">
+                    <input type="checkbox" onclick="selectAllMessages(this)" style="transform: scale(1.5);">
+                </div>
+            </div>
+            <div class="col-1">
+                <button class="btn" onclick="fetchMessages()">
+                    <i class="fas fa-sync" style="font-size:24px"></i>
+                </button>
+            </div>
+            <div class="col-1">
+                <button class="btn" onclick="">
+                    <i class="fas fa-trash-alt" style="font-size:24px"></i>
+                </button>
+            </div>
         </div>
 
         
         <main class="h-100" style="">
-            <div class="row">
                 <!-- Spinner (chargement) -->
                 <div id="spinner" class="" style="height:100%">
                     <div class="wrapper-spinner">
@@ -29,7 +40,6 @@ require('shared/messagerie-header.php');
                 <div id="messages" class="d-none">
 
                 </div>
-            </div>
         </main>
     </div>
 </div>
@@ -41,6 +51,10 @@ require('shared/messagerie-header.php');
     var messages = [];
     //chercher les messages
     function fetchMessages(){
+        $('#spinner').removeClass('d-none');
+        $('#messages').addClass('d-none');
+        $('#no-messages').addClass('d-none');
+
         $.ajax({
             type: 'GET',          //La méthode cible (POST ou GET)
             url : 'api/messages/index.php', //Script Cible
@@ -56,18 +70,18 @@ require('shared/messagerie-header.php');
         console.log('renderMessages');
         console.log(messages);
         if(messages.length == 0){
-            $('#spinner').addClass('d-none');
             $('#no-messages').removeClass('d-none');
         }else{
             console.log('here');
-            $('#spinner').addClass('d-none');
             $('#messages').removeClass('d-none');
             var wrapper = document.getElementById('messages');
+            wrapper.innerHTML = '';
             messages.forEach(message => {
                 console.log(message.is_read);
                 wrapper.innerHTML += messageCardTemplate(message);
             });
         }
+        $('#spinner').addClass('d-none');
     }
 
     function messageCardTemplate(message){
@@ -77,12 +91,13 @@ require('shared/messagerie-header.php');
                 <input class="message-checkbox mx-2" data-message-id="${message.id}" type="checkbox" class="mr-3 my-auto" style="transform:scale(1.5)">
             </div>
             <div>
-                <a href="#" target="_blank" aria-current="page">
+                <a href="index.php?page=message&id=${message.id}" aria-current="page">
                     <div class="ml-4">
                         <div class="d-flex justify-content-between">
                             <span class="font-weight-bold">${message.subject}</span>
                             <span class="text-secondary font-weight-light">${message.created_at}</span>
                         </div>
+                        <div class="font-weight-light">De : ${message.sender}</div>
                         <div class="message-preview text-secondary">
                             ${message.body}
                         </div>
@@ -100,6 +115,7 @@ require('shared/messagerie-header.php');
             $(this)[0].checked = e.checked;
         })
     }
+
     /********************************************
      *
      ************ Document ready *****************

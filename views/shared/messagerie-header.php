@@ -39,4 +39,4 @@
                     </a>
                 </div>
             </div>
-            <div class="col">
+            <div class="col px-0">

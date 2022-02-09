@@ -6,7 +6,10 @@ require_once(ROOT_FOLDER.'DAO/RemarkDao.php');
 
 class PostController extends Controller{
 
-
+public function postRemark(){
+$test = 1;
+$test =2;
+}
 
 
 

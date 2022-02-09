@@ -61,8 +61,8 @@
             </ul>
             <div class="md-form" style="margin: 10px;">
                 <i class="fas fa-pencil-alt prefix"></i>
-                <label for="form10">Ajouter un commentaire</label>
-                <textarea id="form10" id="remark" class="md-textarea form-control" rows="3"></textarea>
+                <label for="remark">Ajouter un commentaire</label>
+                <textarea id="remark" class="md-textarea form-control" rows="3"></textarea>
                 <button onclick="sendRemark()">Envoyer</button>
             </div>
         </div>
@@ -75,7 +75,20 @@
 
 <script>
     function sendRemark() {
-        document.getElementById("remark").value;
+        var remark = document.getElementById("remark").value;
+        var param = JSON.stringify({
+            'remark': remark
+        });
+        $.ajax({
+            type: "POST",
+            url: "index.php?page=post&action=postRemark",
+            dataType: 'json',
+            data: {
+                PARAM: param
+            },
+            success: function(retour) {
+            }
+        });
     }
 </script>
 

@@ -13,6 +13,8 @@ function actionLikePost(idUser, idPost, statut)
                 changebtnLike(idPost, data.data, nbLike);
             }
         },
+        error:function(err){
+        }
     });
 }
 
@@ -95,18 +97,31 @@ function changebtnLike(idPost, statut, like = "0")
 
 }
 
+function trueOrFalse(bool){
+    return bool;
+}
 
 // Inbox
+// return true : si nouveaux message
+// return false : si pas de nouveaux message
 function getUnreadMessagesCount(){
     let currentVal = document.getElementById('inbox-unread').textContent;
     $.ajax({
-        type: 'GET',          //La méthode cible (POST ou GET)
+        type: 'GET',
         url : 'api/messages/index.php?get=unreadCount', //Script Cible
         dataType: 'json',
         success:function(data) {
             if (data.unreadCount != currentVal){
                 $('#inbox-unread').text(data.unreadCount);
                 $('#inbox-logo').addClass('orange');
+                // Si fonction de chargement de message existe 
+                //(si on est sur la page messagerie), rafraichir les messages
+                if (typeof loadMessages === 'function') { 
+                    loadMessages();
+                }
+            }
+            if(data.unreadCount == 0){
+                $('#inbox-logo').removeClass('orange');
             }
         },
     });
@@ -119,10 +134,10 @@ function getUnreadMessagesCount(){
  *
  ********************************************/
 $(document).ready(function() {
-
+    // au chargement de la page, charger le nb de nouveaux messages reçus
     getUnreadMessagesCount();
+    // chaque 5s rafraichir ce nb
     const interval = setInterval(function() {
-        getUnreadMessagesCount();
+        getUnreadMessagesCount()
     }, 5000);
-
 });

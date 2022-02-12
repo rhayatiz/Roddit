@@ -1,4 +1,6 @@
 <?php 
+namespace helpers;
+
 /*********** Fonction de Débuggage *********/
 function dd($a){
     echo "<pre>";

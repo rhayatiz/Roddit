@@ -1,6 +1,8 @@
 <?php
-require_once(ROOT_FOLDER.'controllers' . DIRECTORY_SEPARATOR . 'Controller.php');
-require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'UserDao.php');
+namespace Controllers;
+
+use DAO\UserDao;
+use helpers\Auth;
 
 class UserController extends Controller{
 

@@ -1,22 +1,14 @@
 <?php
-define('ROOT_FOLDER', __DIR__ . DIRECTORY_SEPARATOR );
-
+require_once('autoload.php');
 /*********** Démarrer la session *********/
 if(!isset($_SESSION)){session_start();};
 
-
-
-
-
 /*********** Dependencies *********/
-require('helpers' . DIRECTORY_SEPARATOR . 'functions.php');
-require('helpers' . DIRECTORY_SEPARATOR . 'Auth.php');
-require('controllers' . DIRECTORY_SEPARATOR . 'HomeController.php');
-require('controllers' . DIRECTORY_SEPARATOR . 'PostController.php');
-require('controllers' . DIRECTORY_SEPARATOR . 'LikeController.php');
-require('controllers' . DIRECTORY_SEPARATOR . 'MessageController.php');
-include(ROOT_FOLDER . 'DAO' . DIRECTORY_SEPARATOR . 'DatabasePDO.php');
-
+use Controllers\HomeController;
+use Controllers\PostController;
+use Controllers\LikeController;
+use Controllers\MessageController;
+use helpers\Auth;
 
 /**************************************************************************
  ********************************** ROUTER ********************************

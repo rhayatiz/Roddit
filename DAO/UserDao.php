@@ -1,6 +1,9 @@
 <?php
-include(ROOT_FOLDER.'/models/User.php');
+namespace DAO;
 
+use Models\User;
+use DAO\DatabasePDO;
+use PDO;
 /**
  * UserDao : mise en place CRUD pour users
  */
@@ -40,7 +43,7 @@ class UserDao
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$id]);
         if($stm->rowCount()>0){
-            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+            return $stm->fetchAll(PDO::FETCH_CLASS, User::class)[0]; 
         }
         return null;
     }
@@ -50,7 +53,7 @@ class UserDao
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$username]);
         if($stm->rowCount()>0){
-            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+            return $stm->fetchAll(PDO::FETCH_CLASS, User::class)[0]; 
         }
         return null;
     }
@@ -59,7 +62,7 @@ class UserDao
         $sql = 'SELECT * FROM users WHERE email = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$email]);
-        if($stm->fetchAll(PDO::FETCH_CLASS, 'User')){
+        if($stm->fetchAll(PDO::FETCH_CLASS, User::class)){
             return true;
         }
         return false;
@@ -69,7 +72,7 @@ class UserDao
         $sql = 'SELECT * FROM users WHERE username = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$username]);
-        if($stm->fetchAll(PDO::FETCH_CLASS, 'User')){
+        if($stm->fetchAll(PDO::FETCH_CLASS, User::class)){
             return true;
         }
         return false; 
@@ -85,7 +88,7 @@ class UserDao
         $stm->execute($args);
 
         if($stm->rowCount()>0){
-            return $stm->fetchAll(PDO::FETCH_CLASS, 'User')[0]; 
+            return $stm->fetchAll(PDO::FETCH_CLASS, User::class)[0]; 
         }else{
             return null;
         }

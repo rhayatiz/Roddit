@@ -1,6 +1,5 @@
 <?php
-
-require_once('Model.php');
+namespace Models;
 
 class Like extends Model
 {

@@ -1,4 +1,8 @@
 <?php 
+namespace helpers;
+
+use DAO\UserDao;
+
 class Auth {
     protected static $user = null;
     /**
@@ -7,7 +11,6 @@ class Auth {
      * @return User | null 
      */
     public static function user(){
-        //TODO session['user'] doit contenir l'id de l'utilisateur
         //si défini, on doit appeler userDAO et récupérer l'user à partir de son id depuis la bdd
         if(isset($_SESSION['userId'])){
             if(empty(self::$user)){

@@ -1,6 +1,7 @@
 <?php
-require_once(ROOT_FOLDER.'controllers/Controller.php');
-require_once(ROOT_FOLDER.'DAO/LikeDao.php');
+namespace Controllers;
+
+use DAO\LikeDao;
 
 class LikeController extends Controller
 {

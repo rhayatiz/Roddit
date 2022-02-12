@@ -1,6 +1,8 @@
 <?php
-include(ROOT_FOLDER.'/models/Message.php');
+namespace DAO;
 
+use Models\Message;
+use PDO;
 /**
  * MessageDao : CRUD
  */
@@ -23,7 +25,7 @@ class MessageDao
                 $sql = 'SELECT * FROM messages WHERE recipient_id = ? and is_read = 0';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$userId]);
-                $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, 'Message'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, Message::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
                 foreach ($unreadMessages as $k=>$message) {
                         //Ajouter le nom de l'utilisateur au message
                         $message->sender = (new UserDao)->get($message->sender_id)->username;
@@ -36,7 +38,7 @@ class MessageDao
                 $sql = 'SELECT * FROM messages WHERE recipient_id = ?';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$userId]);
-                $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, 'Message'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, Message::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
                 foreach ($unreadMessages as $k=>$message) {
                         //Ajouter le nom de l'utilisateur au message
                         $message->sender = (new UserDao)->get($message->sender_id)->username;
@@ -50,7 +52,7 @@ class MessageDao
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$id]);
                 if($stm->rowCount()>0){
-                        return $stm->fetchAll(PDO::FETCH_CLASS, 'Message')[0]; 
+                        return $stm->fetchAll(PDO::FETCH_CLASS, Message::class)[0]; 
                 }
                 return null;
         }

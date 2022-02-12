@@ -12,16 +12,16 @@
                         </a>
                     </div>
                     <div class="card-body row">
-                        <?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
+                        <?php if($Auth){ //Utilisateur connecté, Afficher like dislike?>
                             <div class="col-1">
                                 <div>
-                                    <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 2)"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="btnLike" id="btnLike_<?= $post->id ?>" onclick="actionLikePost(<?= $Auth->id ?>, <?= $post->id ?>, 2)"><i class="fas fa-arrow-up"></i></button>
                                 </div>
                                 <div>
                                     <span style="position: relative; right: -8px;white-space: nowrap" class="allLike_<?= $post->id ?>" id="allLike_<?= $post->id ?>"><?= $post->nbLike - $post->nbDislike?></span>
                                 </div>
                                 <div>
-                                    <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= Auth::user()->id ?>, <?= $post->id ?>, 1)"><i class="fas fa-arrow-down"></i></button>
+                                    <button class="btnLike" id="btnDislike_<?= $post->id ?>" onclick="actionLikePost(<?= $Auth->id ?>, <?= $post->id ?>, 1)"><i class="fas fa-arrow-down"></i></button>
                                 </div>
                             </div>
                         <?php } ?>
@@ -38,12 +38,12 @@
 
         </div>
         
-        <?php if(Auth::user()){ //Utilisateur connecté, side navbar?>
+        <?php if($Auth){ //Utilisateur connecté, side navbar?>
             <!-- Side nav -->
             <div class="card user-side-card d-none d-md-block col-3">
                 <div class="row d-flex mt-1">
                     <div class="btn btn-sm btn-outline-secondary mx-auto w-75">
-                        <a class="no-link-decoration" href="?page=profile&user=<?= Auth::user()->username ?>&show=posts">
+                        <a class="no-link-decoration" href="?page=profile&user=<?= $Auth->username ?>&show=posts">
                             <i class="far fa-plus-square mr-1"></i>Posts
                         </a>
                     </div>
@@ -51,7 +51,7 @@
 
                 <div class="row d-flex mt-1">
                     <div class="btn btn-sm btn-outline-secondary mx-auto w-75">
-                        <a class="no-link-decoration" href="?page=profile&user=<?= Auth::user()->username ?>&show=comments">
+                        <a class="no-link-decoration" href="?page=profile&user=<?= $Auth->username ?>&show=comments">
                             <i class="far fa-comment-alt mr-1"></i>Commentaires
                         </a>
                     </div>
@@ -59,7 +59,7 @@
 
                 <div class="row d-flex mt-1">
                     <div class="btn btn-sm btn-outline-secondary mx-auto w-75">
-                        <a class="no-link-decoration" href="?page=profile&user=<?= Auth::user()->username ?>&show=likes">
+                        <a class="no-link-decoration" href="?page=profile&user=<?= $Auth->username ?>&show=likes">
                             <i class="far fa-thumbs-up mr-1"></i>Likes
                         </a>
                     </div>
@@ -80,8 +80,8 @@
 
 <?php include('shared/footer.php'); ?>
 
-<?php if(Auth::user()){ //Utilisateur connecté, Afficher like dislike?>
+<?php if($Auth){ //Utilisateur connecté, Afficher like dislike?>
     <script>
-        getAllLikePostByUser(<?= Auth::user()->id ?>, 'getAll');
+        getAllLikePostByUser(<?= $Auth->id ?>, 'getAll');
     </script>
 <?php } ?>

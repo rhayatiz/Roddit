@@ -1,5 +1,9 @@
 <?php
-include(ROOT_FOLDER.'/models/Like.php');
+namespace DAO;
+
+use DateTime;
+use Models\Like;
+use PDO;
 
 class LikeDao
 {
@@ -13,7 +17,7 @@ class LikeDao
         $sql='SELECT * FROM `like` INNER JOIN posts p on `like`.idPost = p.id where idUser = ? ORDER BY dateLike DESC';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$userId]);
-        return $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
+        return $stm->fetchAll(PDO::FETCH_CLASS, Like::class);
 
     }
 
@@ -26,7 +30,7 @@ class LikeDao
         $sql='SELECT * FROM `like` WHERE idPost = ? and idUser = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$idPost, $idUser]);
-        $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
+        $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, Like::class);
 
         if($dataFromBdd == null)
         {
@@ -79,7 +83,7 @@ class LikeDao
         $sql='SELECT *, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = ? and `like`.statut = 2) as nbLike, (SELECT COUNT(*) FROM `like` WHERE `like`.idPost = ? and `like`.statut = 1) as nbDislike FROM `like` WHERE idPost = ?';
         $stm = self::$pdo->prepare($sql);
         $stm->execute([$idPost, $idPost, $idPost]);
-        $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, 'Like');
+        $dataFromBdd =  $stm->fetchAll(PDO::FETCH_CLASS, Like::class);
 
         if(empty($dataFromBdd))
         {

@@ -1,5 +1,9 @@
 <?php
-include(ROOT_FOLDER.'/models/Post.php');
+namespace DAO;
+
+use Models\Post as Post;
+use DAO\DatabasePDO;
+use PDO;
 
 /**
  * PostDao : CRUD
@@ -29,7 +33,7 @@ class PostDao
                                  id
                         DESC';
                 $stm = self::$pdo->query($sql);
-                $posts = $stm->fetchAll(PDO::FETCH_CLASS, 'Post'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                $posts = $stm->fetchAll(PDO::FETCH_CLASS, Post::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
 
                 //TODO, add put next logic postRepository instead of DAO
                 foreach ($posts as $post) {
@@ -49,7 +53,7 @@ class PostDao
                 $sql='SELECT * FROM posts WHERE created_by = ? ORDER BY id DESC';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$userId]);
-                $posts = $stm->fetchAll(PDO::FETCH_CLASS, 'Post'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                $posts = $stm->fetchAll(PDO::FETCH_CLASS, Post::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
 
                 //TODO, add put next logic postRepository instead of DAO
                 foreach ($posts as $post) {
@@ -70,7 +74,7 @@ class PostDao
                 ORDER BY id DESC';
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$userId]);
-                $posts = $stm->fetchAll(PDO::FETCH_CLASS, 'Post'); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                $posts = $stm->fetchAll(PDO::FETCH_CLASS, Post::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
 
                 //TODO, add put next logic postRepository instead of DAO
                 foreach ($posts as $post) {
@@ -90,7 +94,7 @@ class PostDao
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$id]);
                 if($stm->rowCount()>0){
-                        return $stm->fetchAll(PDO::FETCH_CLASS, 'Post')[0]; 
+                        return $stm->fetchAll(PDO::FETCH_CLASS, Post::class)[0]; 
                 }
         }
 

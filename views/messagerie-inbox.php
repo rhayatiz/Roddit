@@ -11,7 +11,7 @@ require('shared/messagerie-header.php');
                 </div>
             </div>
             <div class="col-1">
-                <button class="btn" onclick="fetchMessages()">
+                <button class="btn" onclick="loadMessages()">
                     <i class="fas fa-sync" style="font-size:24px"></i>
                 </button>
             </div>
@@ -50,7 +50,7 @@ require('shared/messagerie-header.php');
 <script>
     var messages = [];
     //chercher les messages
-    function fetchMessages(){
+    function loadMessages(){
         $('#spinner').removeClass('d-none');
         $('#messages').addClass('d-none');
         $('#no-messages').addClass('d-none');
@@ -67,17 +67,13 @@ require('shared/messagerie-header.php');
     }
 
     function renderMessages(){
-        console.log('renderMessages');
-        console.log(messages);
         if(messages.length == 0){
             $('#no-messages').removeClass('d-none');
         }else{
-            console.log('here');
             $('#messages').removeClass('d-none');
             var wrapper = document.getElementById('messages');
             wrapper.innerHTML = '';
             messages.forEach(message => {
-                console.log(message.is_read);
                 wrapper.innerHTML += messageCardTemplate(message);
             });
         }
@@ -111,7 +107,6 @@ require('shared/messagerie-header.php');
 
     function selectAllMessages(e){
         $('.message-checkbox').each(function(){
-            console.log($(this));
             $(this)[0].checked = e.checked;
         })
     }
@@ -122,6 +117,6 @@ require('shared/messagerie-header.php');
     *
     ********************************************/
     $(document).ready(function() {
-        fetchMessages();
+        loadMessages();
     });
 </script>

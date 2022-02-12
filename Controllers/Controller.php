@@ -1,7 +1,17 @@
 <?php
-class Controller{
+namespace Controllers;
 
+use helpers\Auth;
+
+class Controller
+{
     protected $viewPath = './views/';
+    protected $user = null;
+
+    public function __construct()
+    {
+        $this->user = Auth::user();
+    }
 
     /**
      * $view = chemin ou nom de la vue à charger (sans extension .html)
@@ -17,6 +27,7 @@ class Controller{
         // DEBUGGING
         // echo "opening ".$this->viewPath . str_replace('.', '/', $view). '.php';
         // die();
+        $data['Auth'] = $this->user;
         ob_start();
         extract($data);
         require($this->viewPath . str_replace('.', '/', $view). '.php');

@@ -1,6 +1,8 @@
 <?php
-require_once(ROOT_FOLDER.'controllers' . DIRECTORY_SEPARATOR . 'Controller.php');
-require_once(ROOT_FOLDER.'DAO' . DIRECTORY_SEPARATOR . 'MessageDao.php');
+namespace Controllers;
+
+use DAO\MessageDao;
+use helpers\Auth;
 
 class MessageController extends Controller{
 

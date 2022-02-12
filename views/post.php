@@ -21,7 +21,7 @@
         </div>
 
         
-        <?php if(Auth::user()){ //Utilisateur connecté, side navbar?>
+        <?php if($Auth){ //Utilisateur connecté, side navbar?>
             <!-- Side nav -->
             <div class="card user-side-card d-none d-md-block col-3">
                 <div class="row d-flex mt-1">

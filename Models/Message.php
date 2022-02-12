@@ -1,18 +1,12 @@
 <?php
+namespace Models;
 
-require_once('Model.php');
+use JsonSerializable;
+use Models\Model;
 
-if (!interface_exists('JsonSerializable')) {
-    interface JsonSerializable {
-       public function jsonSerialize();
-    }
-}
-
-class Message extends Model implements JsonSerializable {
-
+class Message extends Model implements JsonSerializable 
+{
     public function __construct(){}
-
-
     /* On retourne Message dans l'api en tant que JSON
     / Pour transformer un objet php en json, il faut qu'il implemente JsonSerializable
     / On définit dans cette fonction les propriétés qu'on veut "sérializer"
@@ -25,8 +19,6 @@ class Message extends Model implements JsonSerializable {
            'created_at'   => $this->created_at,
            'sender'   => $this->sender,
            'is_read'   => $this->is_read,
-        //    'obj'    => $this->obj->jsonSerialize(), // example for other objects
-        //    'time'   => $this->time
         );
     }
 }

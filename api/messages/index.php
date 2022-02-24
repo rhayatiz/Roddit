@@ -7,13 +7,22 @@ use helpers\Auth;
 use Controllers\MessageController;
 
 // Répondre Que si l'utilisateur est connecté
-if(!Auth::user()){ echo 'Unauthorized access'; die;}
+// if(!Auth::user()){ echo 'Unauthorized access'; die;}
 
 /*****************
  * POST
  *  */ 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+// echo json_encode($_SERVER);
+// exit;
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['body'])){
+        $recipientId = $_POST['recipient_id'];
+        $parentId = $_POST['parent_id'];
+        $body = $_POST['body'];
+        $res = (new MessageController)->newMessage($recipientId, $body, $parentId);
+        echo json_encode([$res]);
+    }
 
 /*****************
  * GET

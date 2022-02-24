@@ -86,7 +86,7 @@ require('shared/messagerie-header.php');
             <div class="d-flex no-click">
                 <input class="message-checkbox mx-2" data-message-id="${message.id}" type="checkbox" class="mr-3 my-auto" style="transform:scale(1.5)">
             </div>
-            <div>
+            <div class="w-100">
                 <a href="index.php?page=message&id=${message.id}" aria-current="page">
                     <div class="ml-4">
                         <div class="d-flex justify-content-between">

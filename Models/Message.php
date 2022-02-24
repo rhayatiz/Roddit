@@ -17,8 +17,10 @@ class Message extends Model implements JsonSerializable
            'subject' => $this->subject,
            'body'   => $this->body,
            'created_at'   => $this->created_at,
+           'sender_id'   => $this->sender_id,
            'sender'   => $this->sender,
            'is_read'   => $this->is_read,
+           'parent_message_id'   => $this->parent_message_id,
         );
     }
 }

@@ -29,7 +29,17 @@ class MessageController extends Controller{
         //Lire le message
         (new MessageDao)->read($id);
         $message = (new MessageDao)->get($id);
+        $olderMessages = [];
+        if($message->parent_message_id != NULL){
+            $olderMessages = (new MessageDao)->getPreviousMessages($message);
+        }
+        $message->previousMessages = $olderMessages;
         $this->render('messagerie-message', compact('message'));
+    }
+
+    public function newMessage($recipientId, $body, $parentId){
+        $senderId = 3;
+        return (new MessageDao)->create($senderId, $recipientId, $body, $parentId);
     }
 
     public function index(){

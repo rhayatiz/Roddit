@@ -57,7 +57,9 @@ class MessageDao
                 $stm = self::$pdo->prepare($sql);
                 $stm->execute([$id]);
                 if($stm->rowCount()>0){
+                        //Ajouter le nom de l'utilisateur au message
                         $message = $stm->fetchAll(PDO::FETCH_CLASS, Message::class)[0]; 
+                        $message->sender = (new UserDao)->get($message->sender_id)->username;
                         if($message->subject == "" && $message->parent_message_id != NULL){
                                 $parentSubject = (new MessageDao)->get($message->parent_message_id)->subject;
                                 $message->subject =  "RE: " . $parentSubject;

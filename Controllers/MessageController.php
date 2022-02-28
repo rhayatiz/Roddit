@@ -38,7 +38,7 @@ class MessageController extends Controller{
     }
 
     public function newMessage($recipientId, $body, $parentId){
-        $senderId = 3;
+        $senderId = Auth::user()->id;
         return (new MessageDao)->create($senderId, $recipientId, $body, $parentId);
     }
 

@@ -36,16 +36,33 @@ class MessageDao
         }
 
         function getUserMessages($userId){
-                $sql = 'SELECT * FROM messages WHERE recipient_id = ? ORDER BY created_at DESC';
+                $sql = "SELECT *
+                        FROM   messages
+                        WHERE  recipient_id = ?
+                        AND parent_message_id IS NULL
+                        AND id NOT IN (SELECT parent_message_id
+                                        FROM   messages
+                                        WHERE  parent_message_id IS NOT NULL
+                                                AND recipient_id = ?)
+                        UNION
+                        SELECT *
+                        FROM   messages m
+                        WHERE  recipient_id = ?
+                        AND parent_message_id IS NOT NULL
+                        AND m.created_at = (SELECT Max(created_at)
+                                                FROM   messages m1
+                                                WHERE  m1.parent_message_id = m.parent_message_id
+                                                        AND m1.recipient_id = m.recipient_id)
+                        GROUP  BY parent_message_id ";
                 $stm = self::$pdo->prepare($sql);
-                $stm->execute([$userId]);
+                $stm->execute([$userId, $userId, $userId]);
                 $unreadMessages = $stm->fetchAll(PDO::FETCH_CLASS, Message::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
                 foreach ($unreadMessages as $k=>$message) {
                         //Ajouter le nom de l'utilisateur au message
                         $message->sender = (new UserDao)->get($message->sender_id)->username;
                         if($message->subject == "" && $message->parent_message_id != NULL){
                                 $parentSubject = (new MessageDao)->get($message->parent_message_id)->subject;
-                                $message->subject =  "RE: " . $parentSubject;
+                                $message->subject =  $parentSubject;
                         }
                 }
                 return $unreadMessages;
@@ -62,28 +79,25 @@ class MessageDao
                         $message->sender = (new UserDao)->get($message->sender_id)->username;
                         if($message->subject == "" && $message->parent_message_id != NULL){
                                 $parentSubject = (new MessageDao)->get($message->parent_message_id)->subject;
-                                $message->subject =  "RE: " . $parentSubject;
+                                $message->subject =  $parentSubject;
                         }
                         return $message;
                 }
                 return null;
         }
 
-        function getPreviousMessages($message){
-                $parentMessage = $this->get($message->parent_message_id);
-                $sql = "SELECT *, DATE(created_at) as creation_date 
-                        FROM messages WHERE parent_message_id = ?
-                        AND created_at < ?
-                        ORDER BY creation_date";
+        function getAllConversationMessages($message){
+                $sql = "SELECT * 
+                        FROM messages 
+                        WHERE id = ?
+                        OR parent_message_id = ?
+                        ORDER BY created_at";
                 $stm = self::$pdo->prepare($sql);
-                $stm->execute([$message->parent_message_id, $message->created_at]);
+                $stm->execute([$message->parent_message_id, $message->parent_message_id]);
                 $res = [];
-                $res[] = $parentMessage;
-                $olderMessages = $stm->fetchAll(PDO::FETCH_CLASS, Message::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
-                foreach ($olderMessages as $olderMessage) {
-                        if($olderMessage->id != $message->id){
-                                $res[] = $olderMessage;
-                        }
+                $conversationMessages = $stm->fetchAll(PDO::FETCH_CLASS, Message::class); //FETCH_BOTH - FETCH_CLASS - FETCH_ASSOC
+                foreach ($conversationMessages as $conversationMessage) {
+                        $res[] = $conversationMessage;
                 }
                 return $res;
         }
@@ -94,12 +108,21 @@ class MessageDao
                 $stm->execute([$id]);
         }
 
-        function create($senderId, $recipientId, $body, $parentId){
+        function createResponse($senderId, $recipientId, $body, $parentId){
                 $dateTime = new DateTime('NOW');
                 $created_at = $dateTime->format('Y-m-d H:i:s');
                 $sql = 'INSERT INTO `messages` (body, sender_id, recipient_id, created_at, parent_message_id) VALUES (?,?,?,?,?)';
                 $stm = self::$pdo->prepare($sql);
                 $res = $stm->execute([$body, $senderId, $recipientId, $created_at, $parentId]);
+                return $res;
+        }
+
+        function createMessage($senderId, $recipientId, $subject, $body){
+                $dateTime = new DateTime('NOW');
+                $created_at = $dateTime->format('Y-m-d H:i:s');
+                $sql = 'INSERT INTO `messages` (body, sender_id, recipient_id, created_at, subject) VALUES (?,?,?,?,?)';
+                $stm = self::$pdo->prepare($sql);
+                $res = $stm->execute([$body, $senderId, $recipientId, $created_at, $subject]);
                 return $res;
         }
 }

@@ -14,36 +14,28 @@ require('shared/messagerie-header.php');
         
         <main class="pb-3 pt-1" style="height: calc(100% - 253px);overflow-y:auto">
             <div class="px-3 pb-1 h5 font-weight-light border-bottom">
-                <div class="font-weight-bold">Sujet : <?= $message->subject ?></div>
-                <div>De: <?= $message->sender ?></div>
+                <div class="font-weight-bold">Sujet : <?= $sujet ?></div>
+                <div>De: <?= $sender ?></div>
             </div>
             <div class="conversation-wrapper px-3">
-                <?php if(count($message->previousMessages)>0)
-                {
-                    foreach($message->previousMessages as $previousMsg)
-                    { 
-                ?>
-                        <div class="older message-sent text-justify message col-7 <?= $previousMsg->sender_id == $Auth->id ? 'ml-auto text-right' : '' ?>">
-                            <div class="font-weight-light message-date" style="font-size:.875rem">— <?= $previousMsg->created_at ?></div>
-                            <div class="message" style="font-size: .925rem">
-                                <?= $previousMsg->body ?>
-                            </div>
-                        </div>
                 <?php 
-                    }
-                } 
+                foreach($conversationMessages as $message)
+                { 
                 ?>
-                <div class="OG message col-7">
-                    <div class="font-weight-light message-date" style="font-size:.875rem">— <?= $message->created_at ?></div>
-                    <div class="message" style="font-size: .925rem">
-                        <?= $message->body ?>
+                    <div class="older mt-2 message-sent text-justify message col-7 <?= $message->sender_id == $Auth->id ? 'ml-auto text-right' : '' ?>">
+                        <div class="font-weight-light message-date" style="font-size:.875rem">— <?= $message->created_at ?></div>
+                        <div class="message" style="font-size: .925rem">
+                            <?= $message->body ?>
+                        </div>
                     </div>
-                </div>
+                <?php 
+                }
+                ?>
             </div>
         </main>
 
-        <input type="hidden" id="parent-message-id" value="<?= count($message->previousMessages)>0 ? $message->parent_message_id : $message->id ?>">
-        <input type="hidden" id="sender-id" value="<?= $message->sender_id ?>">
+        <input type="hidden" id="parent-message-id" value="<?= $ogMessage->parent_message_id ? $ogMessage->parent_message_id : $ogMessage->id ?>">
+        <input type="hidden" id="sender-id" value="<?= $ogMessage->sender_id ?>">
 
         <section id="reply-wrapper" class="px-3">
             <div class="h5 font-weight-light mb-3">Répondre</div>

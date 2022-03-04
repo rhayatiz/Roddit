@@ -16,12 +16,22 @@ use Controllers\MessageController;
 // exit;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    if(isset($_POST['body'])){
-        $recipientId = $_POST['recipient_id'];
-        $parentId = $_POST['parent_id'];
-        $body = $_POST['body'];
-        $res = (new MessageController)->newMessage($recipientId, $body, $parentId);
+    // Nouveau message
+    if(isset($_POST['newMessage'])){
+        $recipientId = $_POST['destinataireId'];
+        $subject = $_POST['subject'];
+        $body = $_POST['message'];
+        $res = (new MessageController)->newMessage($recipientId, $subject, $body);
         echo json_encode([$res]);
+    }else{
+        // Reponse à un message existant
+        if(isset($_POST['body'])){
+            $recipientId = $_POST['recipient_id'];
+            $parentId = $_POST['parent_id'];
+            $body = $_POST['body'];
+            $res = (new MessageController)->newResponse($recipientId, $body, $parentId);
+            echo json_encode([$res]);
+        }
     }
 
 /*****************
@@ -48,6 +58,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     /*****************
      * /api/messages
      * Tous les messages reçus par l'utilisateur
+     * groupés par SUJET 
+     * (tous les messages parents et leurs messages enfants)
      *  */ 
     }else{
         $data = (new MessageController)->all();

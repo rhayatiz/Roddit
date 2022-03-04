@@ -27,19 +27,29 @@ class MessageController extends Controller{
     // get specific message by id
     public function get($id){
         //Lire le message
+        $conversationMessages = [];
         (new MessageDao)->read($id);
-        $message = (new MessageDao)->get($id);
-        $olderMessages = [];
-        if($message->parent_message_id != NULL){
-            $olderMessages = (new MessageDao)->getPreviousMessages($message);
+        $ogMessage = (new MessageDao)->get($id);
+        $conversationMessages[] = $ogMessage;
+        if($ogMessage->parent_message_id != NULL){
+            $conversationMessages = [];
+            $result = (new MessageDao)->getAllConversationMessages($ogMessage);
+            $conversationMessages = $result;
         }
-        $message->previousMessages = $olderMessages;
-        $this->render('messagerie-message', compact('message'));
+        $sujet = $ogMessage->subject;
+        $sender = $ogMessage->sender;
+        $sender_id = $ogMessage->sender_id;
+        $this->render('messagerie-message', compact('conversationMessages', 'sujet', 'sender', 'sender_id', 'ogMessage'));
     }
 
-    public function newMessage($recipientId, $body, $parentId){
+    public function newResponse($recipientId, $body, $parentId){
         $senderId = Auth::user()->id;
-        return (new MessageDao)->create($senderId, $recipientId, $body, $parentId);
+        return (new MessageDao)->createResponse($senderId, $recipientId, $body, $parentId);
+    }
+
+    public function newMessage($recipientId, $subject, $body){
+        $senderId = Auth::user()->id;
+        return (new MessageDao)->createMessage($senderId, $recipientId, $subject, $body);
     }
 
     public function index(){

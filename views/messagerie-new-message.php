@@ -141,7 +141,8 @@ require('shared/messagerie-header.php');
                 {
                     "destinataireId": destinataireId,
                     "subject": subject,
-                    "message": message
+                    "message": message,
+                    "newMessage":true
                 }
         }
     }
@@ -149,8 +150,19 @@ require('shared/messagerie-header.php');
     function sendMessage(){
         if(data = validateForm()){
             // Envoyer le message
-            console.log('sending message');
             console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "./api/messages/",
+                dataType: "json",
+                data: data,
+                success: function(res){
+                    console.log(res);
+                },
+                error: function(res){
+                    console.log(res);
+                },
+            });
         }else{
             $("#errorInputs").removeClass('d-none');
         }
